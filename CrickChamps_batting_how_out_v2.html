@@ -1,0 +1,346 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>PivotTable.js</title>
+
+        <!-- external libs from cdnjs -->
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
+
+
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/d3_renderers.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/c3_renderers.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/export_renderers.min.js"></script>
+
+        <style>
+            body {font-family: Verdana;}
+            .node {
+              border: solid 1px white;
+              font: 10px sans-serif;
+              line-height: 12px;
+              overflow: hidden;
+              position: absolute;
+              text-indent: 2px;
+            }
+            .c3-line, .c3-focused {stroke-width: 3px !important;}
+            .c3-bar {stroke: white !important; stroke-width: 1;}
+            .c3 text { font-size: 12px; color: grey;}
+            .tick line {stroke: white;}
+            .c3-axis path {stroke: grey;}
+            .c3-circle { opacity: 1 !important; }
+            .c3-xgrid-focus {visibility: hidden !important;}
+        </style>
+    </head>
+    <body>
+        <script type="text/javascript">
+            $(function(){
+                if(window.location != window.parent.location)
+                    $("<a>", {target:"_blank", href:""})
+                        .text("[pop out]").prependTo($("body"));
+
+                $("#output").pivotUI(
+                    $.csv.toArrays($("#output").text()),
+                    $.extend({
+                        renderers: $.extend(
+                            $.pivotUtilities.renderers,
+                            $.pivotUtilities.c3_renderers,
+                            $.pivotUtilities.d3_renderers,
+                            $.pivotUtilities.export_renderers
+                            ),
+                        hiddenAttributes: [""]
+                    }, {"rows": ["Player"], "cols": ["How_out"], "vals": ["Runs"], "aggregatorName": "Count", "rendererName": "Row Heatmap", "menuLimit": 50, "showUI": true})
+                ).show();
+             });
+        </script>
+        <div id="output" style="display: none;">,Player,Player_Id,Batter,How_out,Fielder,Bowler,Sixs,Fours,Runs,Balls,match_id,league_id,season_id,season,match_date,opposition,ground
+0,Deepak CC,56905,Deepak CC,caught,Surya Wolfpack,Manjunath B,0.0,1.0,29,34.0,20659,5,59,Spring 2023 - Div C,2023-03-25,Seattle Blues,Meadowdale Multipurpose Field 1
+1,Deepak CC,56905,Deepak CC,bowled,0,Dhaval Shah,0.0,2.0,38,37.0,20744,5,59,Spring 2023 - Div C,2023-04-02,Torpedoes,Ron Regis
+2,Deepak CC,56905,Deepak CC,caught,Praveen Kumar Devaraj,Vishnu Vijayagopal,0.0,1.0,15,18.0,20800,5,59,Spring 2023 - Div C,2023-04-09,Pirates of Seattle,North Robinswood Park
+3,Deepak CC,56905,Deepak CC,bowled,0,Jatinder Singh Dhillon,0.0,0.0,4,0.0,20004,4,57,Summer 2022 - Div B,2022-07-30,Great Eight,Redmond Ridge Park -- Soccer Field
+4,Deepak CC,56905,Deepak CC,caught,Ravi Samatham,Dewashish Chandramauli,5.0,4.0,65,34.0,20079,4,57,Summer 2022 - Div B,2022-08-07,Kachraboyzsecond,North SeaTac Park
+5,Deepak CC,56905,Deepak CC,caught,Ranjit Unnikrishnan,Vishnu Vijayagopal,1.0,2.0,34,46.0,20227,4,57,Summer 2022 - Div B,2022-08-28,Pirates Of Seattle,Marymoor Park Soccer #05
+6,Deepak CC,56905,Deepak CC,caught,Dipankar SR,Arun C Pentapalli,1.0,5.0,63,48.0,20302,4,57,Summer 2022 - Div B,2022-09-11,Stingrays,Ron Regis
+7,Deepak CC,56905,Deepak CC,caught,Nishant R Bhatt,Dhaval Shah,0.0,0.0,26,42.0,20438,4,57,Summer 2022 - Div B,2022-10-08,Torpedoes,Hidden Valley Park Field 1
+8,Deepak CC,56905,Deepak CC,not out,0,0,1.0,2.0,22,15.0,20571,4,57,Summer 2022 - Div B,2022-10-15,Seattle United - Supercharged,Hidden Valley Park Field 1
+9,Deepak CC,56905,Deepak CC,caught,Bhuvan k,Kavi Reddy,0.0,0.0,0,0.0,18859,5,50,Summer 2021 - Div C,2021-08-28,Super Fit Stallions,North SeaTac Park
+10,Deepak CC,56905,Deepak CC,not out,0,0,1.0,2.0,33,31.0,18964,5,50,Summer 2021 - Div C,2021-09-18,Indiawaale,Hidden Valley Park Field 1
+11,Deepak CC,56905,Deepak CC,caught,Ashwini Singh,Shakeeb Sagheer,0.0,0.0,9,14.0,17731,6,47,Summer 2019 - Div D,2019-07-13,Eight Musketers,Redmond High School Stadium
+12,Deepak CC,56905,Deepak CC,not out,0,0,0.0,1.0,24,19.0,17852,6,47,Summer 2019 - Div D,2019-07-27,Renton Dare Devils,GrassLawn Park-Softball Field 2
+13,Deepak CC,56905,Deepak CC,caught,Prashant Blazers,0,0.0,0.0,29,0.0,17955,6,47,Summer 2019 - Div D,2019-08-03,FatehCC-Blazers,Redmond Ridge Park -- Soccer Field
+14,Deepak CC,56905,Deepak CC,not out,0,0,0.0,0.0,5,8.0,18116,6,47,Summer 2019 - Div D,2019-08-25,Sheirokom Team,Eastlake High School Stadium
+15,Deepak CC,56905,Deepak CC,caught,Nishant R Bhatt,Sanjeev Khanna,0.0,0.0,1,6.0,18315,6,47,Summer 2019 - Div D,2019-09-29,Torpedoes,Shoreline Ground
+16,Deepak CC,56905,Deepak CC,not out,0,0,0.0,0.0,35,0.0,16264,6,46,Spring 2019 - Div D,2019-03-24,Crime Masters Gogo,Redmond High School Stadium
+17,Deepak CC,56905,Deepak CC,caught,Haranath Payyavula,Pradeep Voona,0.0,0.0,12,0.0,16434,6,46,Spring 2019 - Div D,2019-04-13,Team Gryphon,Perigo Park-Softball Field 1
+18,Deepak CC,56905,Deepak CC,caught,Raj Blazers,Tarun Shimoga,0.0,2.0,18,18.0,16518,6,46,Spring 2019 - Div D,2019-04-21,FatehCC-Blazers,Redmond High School Stadium
+19,Deepak CC,56905,Deepak CC,bowled,0,Vinodh Maanickam,0.0,0.0,16,0.0,16687,6,46,Spring 2019 - Div D,2019-06-02,Pirates of Seattle,North Robinswood Park
+20,Deepak CC,56905,Deepak CC,caught,Sagar Kulkarni,Uday Unni,1.0,6.0,55,0.0,16770,6,46,Spring 2019 - Div D,2019-06-15,Gilly,Eastlake High School Stadium
+21,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,caught,Manjunath B,Manjunath B,0.0,0.0,20,22.0,20659,5,59,Spring 2023 - Div C,2023-03-25,Seattle Blues,Meadowdale Multipurpose Field 1
+22,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,not out,0,0,2.0,0.0,39,31.0,20744,5,59,Spring 2023 - Div C,2023-04-02,Torpedoes,Ron Regis
+23,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,bowled,0,Banu Pirates of Seattle 3137,0.0,0.0,8,8.0,20800,5,59,Spring 2023 - Div C,2023-04-09,Pirates of Seattle,North Robinswood Park
+24,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,not out,0,0,0.0,2.0,24,26.0,19227,5,56,Spring 2022 - Div C,2022-03-19,Northern Thunder,Hidden Valley Park Field 1
+25,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,bowled,0,Jeet Mody,0.0,0.0,3,4.0,19367,5,56,Spring 2022 - Div C,2022-04-23,Raftaar,Perigo Park-Softball Field 2
+26,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,caught,Rakshith Halevoor Prabhachand,Sitanshu Maheshwari,0.0,0.0,14,23.0,19798,5,56,Spring 2022 - Div C,2022-06-26,India Rebels,Redmond High School Stadium
+27,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,bowled,0,Shaadab Alam,0.0,1.0,28,38.0,19827,5,56,Spring 2022 - Div C,2022-07-09,Indiawaale,Hartman Park-Soccer Field
+28,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,retired hurt,0,0,0.0,1.0,17,21.0,19937,5,56,Spring 2022 - Div C,2022-07-17,Daredevils CC,North SeaTac Park
+29,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,not out,0,0,0.0,0.0,6,6.0,18964,5,50,Summer 2021 - Div C,2021-09-18,Indiawaale,Hidden Valley Park Field 1
+30,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,not out,0,0,1.0,1.0,32,36.0,17731,6,47,Summer 2019 - Div D,2019-07-13,Eight Musketers,Redmond High School Stadium
+31,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,runout,Abhishek Kumar,0,0.0,0.0,8,9.0,18256,6,47,Summer 2019 - Div D,2019-09-15,Sidewinders Reloaded,Redmond High School Stadium
+32,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,runout,Sandeep Arora,Sandeep Arora,0.0,0.0,29,26.0,18383,6,47,Summer 2019 - Div D,2019-10-20,Super Fit stars,North SeaTac Park
+33,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,runout,Akshar Gupta,Saptarishi Dey,0.0,0.0,3,0.0,16264,6,46,Spring 2019 - Div D,2019-03-24,Crime Masters Gogo,Redmond High School Stadium
+34,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,caught,Raj Eight Musk,Maneesh Akula,0.0,0.0,3,5.0,16352,6,46,Spring 2019 - Div D,2019-04-06,Eight Musketers,Hidden Valley Park Field 1
+35,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,bowled,0,Pradeep Voona,0.0,0.0,18,0.0,16434,6,46,Spring 2019 - Div D,2019-04-13,Team Gryphon,Perigo Park-Softball Field 1
+36,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,not out,0,0,0.0,0.0,12,18.0,16594,6,46,Spring 2019 - Div D,2019-05-19,SEA-Chargers,Marymoor Park Soccer #03
+37,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,caught,Uday Unni,Subramaniam Turuvekere Seetharam,0.0,0.0,12,0.0,16770,6,46,Spring 2019 - Div D,2019-06-15,Gilly,Eastlake High School Stadium
+38,Dheeraj Jonnala,53098,Dheeraj Jonnala,bowled,0,Raju Siruvuri,0.0,1.0,11,18.0,20659,5,59,Spring 2023 - Div C,2023-03-25,Seattle Blues,Meadowdale Multipurpose Field 1
+39,Dheeraj Jonnala,53098,Dheeraj Jonnala,caught,Rahul Potghan,Nishant R Bhatt,0.0,0.0,17,19.0,20744,5,59,Spring 2023 - Div C,2023-04-02,Torpedoes,Ron Regis
+40,Dheeraj Jonnala,53098,Dheeraj Jonnala,runout,Xavier Antony,0,0.0,0.0,6,6.0,20800,5,59,Spring 2023 - Div C,2023-04-09,Pirates of Seattle,North Robinswood Park
+41,Dheeraj Jonnala,53098,Dheeraj Jonnala,caught,Ravi Samatham,Dewashish Chandramauli,0.0,3.0,27,29.0,20079,4,57,Summer 2022 - Div B,2022-08-07,Kachraboyzsecond,North SeaTac Park
+42,Dheeraj Jonnala,53098,Dheeraj Jonnala,caught,Nitin BB,Pravi Garg,0.0,0.0,1,4.0,20153,4,57,Summer 2022 - Div B,2022-08-20,Back Breakers,Marymoor Park Soccer #05
+43,Dheeraj Jonnala,53098,Dheeraj Jonnala,caught,Dhaval Shah,Gangadhar Myrmidons,0.0,0.0,6,10.0,20438,4,57,Summer 2022 - Div B,2022-10-08,Torpedoes,Hidden Valley Park Field 1
+44,Dheeraj Jonnala,53098,Dheeraj Jonnala,not out,0,0,0.0,0.0,14,18.0,19245,5,56,Spring 2022 - Div C,2022-03-27,Takbeer,Hidden Valley Park Field 1
+45,Dheeraj Jonnala,53098,Dheeraj Jonnala,caught,Aashish Bhateja,Atharva Ranade,0.0,0.0,24,27.0,19367,5,56,Spring 2022 - Div C,2022-04-23,Raftaar,Perigo Park-Softball Field 2
+46,Dheeraj Jonnala,53098,Dheeraj Jonnala,runout,Manoj Slammers,0,0.0,0.0,1,0.0,19437,5,56,Spring 2022 - Div C,2022-05-08,Slammers,Hidden Valley Park Field 1
+47,Dheeraj Jonnala,53098,Dheeraj Jonnala,caught,Rohan Jain,Venkat Pramod Dandibhotla,0.0,1.0,18,19.0,19827,5,56,Spring 2022 - Div C,2022-07-09,Indiawaale,Hartman Park-Soccer Field
+48,Dheeraj Jonnala,53098,Dheeraj Jonnala,caught,Aakash Shah,Aakash Shah,0.0,1.0,8,8.0,19937,5,56,Spring 2022 - Div C,2022-07-17,Daredevils CC,North SeaTac Park
+49,Dheeraj Jonnala,53098,Dheeraj Jonnala,caught,Rakshith Halevoor Prabhachand,Yash Rolyan,0.0,0.0,12,13.0,19862,5,56,Spring 2022 - Div C,2022-07-23,India Rebels,North SeaTac Park
+50,Dheeraj Jonnala,53098,Dheeraj Jonnala,bowled,0,RAKESH KUMAR SeattleJaguars,0.0,0.0,14,13.0,18642,5,50,Summer 2021 - Div C,2021-07-25,SeattleJaguars,GrassLawn Park-Softball Field 1
+51,Dheeraj Jonnala,53098,Dheeraj Jonnala,bowled,0,Nishant R Bhatt,0.0,0.0,6,11.0,18711,5,50,Summer 2021 - Div C,2021-08-07,Torpedoes,GrassLawn Park-Softball Field 1
+52,Dheeraj Jonnala,53098,Dheeraj Jonnala,caught,Amith Vangala,Viresh Gehlawat,0.0,0.0,1,0.0,18783,5,50,Summer 2021 - Div C,2021-08-15,Bouncers,Hartman Park-Soccer Field
+53,Dheeraj Jonnala,53098,Dheeraj Jonnala,caught,Sreenath Diggireddy,Akhil G,0.0,0.0,7,0.0,18859,5,50,Summer 2021 - Div C,2021-08-28,Super Fit Stallions,North SeaTac Park
+54,Dheeraj Jonnala,53098,Dheeraj Jonnala,bowled,0,Gangadhar Vasupalli,0.0,0.0,1,4.0,19030,5,50,Summer 2021 - Div C,2021-10-02,Sound8,Marymoor Park Soccer #05
+55,Suresh Poliah,55616,Suresh Poliah,runout,Gangadhar Myrmidons,0,0.0,0.0,1,2.0,20744,5,59,Spring 2023 - Div C,2023-04-02,Torpedoes,Ron Regis
+56,Suresh Poliah,55616,Suresh Poliah,not out,0,0,0.0,1.0,16,23.0,20800,5,59,Spring 2023 - Div C,2023-04-09,Pirates of Seattle,North Robinswood Park
+57,Suresh Poliah,55616,Suresh Poliah,bowled,0,Jagpreet Singh Rataul,0.0,0.0,1,0.0,20004,4,57,Summer 2022 - Div B,2022-07-30,Great Eight,Redmond Ridge Park -- Soccer Field
+58,Suresh Poliah,55616,Suresh Poliah,not out,0,0,0.0,0.0,1,1.0,20153,4,57,Summer 2022 - Div B,2022-08-20,Back Breakers,Marymoor Park Soccer #05
+59,Suresh Poliah,55616,Suresh Poliah,not out,0,0,0.0,0.0,1,3.0,20227,4,57,Summer 2022 - Div B,2022-08-28,Pirates Of Seattle,Marymoor Park Soccer #05
+60,Suresh Poliah,55616,Suresh Poliah,not out,0,0,0.0,0.0,2,4.0,20438,4,57,Summer 2022 - Div B,2022-10-08,Torpedoes,Hidden Valley Park Field 1
+61,Suresh Poliah,55616,Suresh Poliah,caught,Raj Slammerteam,Raj Slammerteam,0.0,0.0,3,0.0,19437,5,56,Spring 2022 - Div C,2022-05-08,Slammers,Hidden Valley Park Field 1
+62,Suresh Poliah,55616,Suresh Poliah,caught,Sunny H Pandya,Yash Rolyan,0.0,0.0,8,9.0,19862,5,56,Spring 2022 - Div C,2022-07-23,India Rebels,North SeaTac Park
+63,Suresh Poliah,55616,Suresh Poliah,caught,GAURAV YAKHMI,RAKESH KUMAR SeattleJaguars,0.0,0.0,1,2.0,18642,5,50,Summer 2021 - Div C,2021-07-25,SeattleJaguars,GrassLawn Park-Softball Field 1
+64,Suresh Poliah,55616,Suresh Poliah,caught,Siddharth Raghavan,Dhaval Shah,0.0,0.0,2,4.0,18711,5,50,Summer 2021 - Div C,2021-08-07,Torpedoes,GrassLawn Park-Softball Field 1
+65,Suresh Poliah,55616,Suresh Poliah,not out,0,0,0.0,0.0,2,0.0,18783,5,50,Summer 2021 - Div C,2021-08-15,Bouncers,Hartman Park-Soccer Field
+66,Suresh Poliah,55616,Suresh Poliah,not out,0,0,2.0,0.0,13,0.0,18859,5,50,Summer 2021 - Div C,2021-08-28,Super Fit Stallions,North SeaTac Park
+67,Suresh Poliah,55616,Suresh Poliah,not out,0,0,0.0,0.0,1,2.0,19030,5,50,Summer 2021 - Div C,2021-10-02,Sound8,Marymoor Park Soccer #05
+68,Suresh Poliah,55616,Suresh Poliah,bowled,0,Harnil Rafalia,0.0,0.0,6,6.0,17731,6,47,Summer 2019 - Div D,2019-07-13,Eight Musketers,Redmond High School Stadium
+69,Suresh Poliah,55616,Suresh Poliah,not out,0,0,0.0,0.0,13,17.0,18006,6,47,Summer 2019 - Div D,2019-08-10,Daredevils CC,Ron Regis
+70,Suresh Poliah,55616,Suresh Poliah,did not bat,0,0,0.0,0.0,0,0.0,18383,6,47,Summer 2019 - Div D,2019-10-20,Super Fit stars,North SeaTac Park
+71,Suresh Poliah,55616,Suresh Poliah,bowled,0,Saketh Varma S,0.0,0.0,3,0.0,16264,6,46,Spring 2019 - Div D,2019-03-24,Crime Masters Gogo,Redmond High School Stadium
+72,Suresh Poliah,55616,Suresh Poliah,caught,Shakeeb Sagheer,Chintan Patel,0.0,0.0,7,11.0,16352,6,46,Spring 2019 - Div D,2019-04-06,Eight Musketers,Hidden Valley Park Field 1
+73,Suresh Poliah,55616,Suresh Poliah,not out,0,0,0.0,0.0,3,0.0,16434,6,46,Spring 2019 - Div D,2019-04-13,Team Gryphon,Perigo Park-Softball Field 1
+74,Suresh Poliah,55616,Suresh Poliah,runout,Prashant Blazers,0,0.0,0.0,1,2.0,16518,6,46,Spring 2019 - Div D,2019-04-21,FatehCC-Blazers,Redmond High School Stadium
+75,Suresh Poliah,55616,Suresh Poliah,bowled,0,Raj Perala,0.0,0.0,6,8.0,16594,6,46,Spring 2019 - Div D,2019-05-19,SEA-Chargers,Marymoor Park Soccer #03
+76,Suresh Poliah,55616,Suresh Poliah,caught,Santosh Pirates of Seattle 12305,Hari Pirates of Seattle 5026,0.0,0.0,1,0.0,16687,6,46,Spring 2019 - Div D,2019-06-02,Pirates of Seattle,North Robinswood Park
+77,Suresh Poliah,55616,Suresh Poliah,not out,0,0,0.0,0.0,0,0.0,16770,6,46,Spring 2019 - Div D,2019-06-15,Gilly,Eastlake High School Stadium
+78,Avinash Naga,55618,Avinash Naga,not out,0,0,0.0,0.0,1,2.0,20659,5,59,Spring 2023 - Div C,2023-03-25,Seattle Blues,Meadowdale Multipurpose Field 1
+79,Avinash Naga,55618,Avinash Naga,bowled,0,Praneeth Pirates,0.0,0.0,9,25.0,20800,5,59,Spring 2023 - Div C,2023-04-09,Pirates of Seattle,North Robinswood Park
+80,Avinash Naga,55618,Avinash Naga,bowled,0,Jatinder Singh Dhillon,0.0,0.0,3,0.0,20004,4,57,Summer 2022 - Div B,2022-07-30,Great Eight,Redmond Ridge Park -- Soccer Field
+81,Avinash Naga,55618,Avinash Naga,caught,Anurag Mangal,Parag Thakre,0.0,0.0,1,2.0,20153,4,57,Summer 2022 - Div B,2022-08-20,Back Breakers,Marymoor Park Soccer #05
+82,Avinash Naga,55618,Avinash Naga,caught,Muralidhar Sathsahayaraman.,Tapan Goyal,0.0,0.0,0,2.0,19227,5,56,Spring 2022 - Div C,2022-03-19,Northern Thunder,Hidden Valley Park Field 1
+83,Avinash Naga,55618,Avinash Naga,caught,Prasanjeet Jena,Sandeep Limaye,0.0,0.0,1,2.0,19367,5,56,Spring 2022 - Div C,2022-04-23,Raftaar,Perigo Park-Softball Field 2
+84,Avinash Naga,55618,Avinash Naga,caught,Karthic Raghavan,Raj Slammerteam,0.0,0.0,27,0.0,19437,5,56,Spring 2022 - Div C,2022-05-08,Slammers,Hidden Valley Park Field 1
+85,Avinash Naga,55618,Avinash Naga,bowled,0,0,0.0,0.0,0,0.0,19483,5,56,Spring 2022 - Div C,2022-05-21,Torpedoes,North SeaTac Park
+86,Avinash Naga,55618,Avinash Naga,caught,Rithvik Manepalli,shanthan N,0.0,0.0,4,0.0,19590,5,56,Spring 2022 - Div C,2022-06-19,ATB Stallions,Hidden Valley Park Field 1
+87,Avinash Naga,55618,Avinash Naga,bowled,0,Srujan Shah,0.0,0.0,1,7.0,19798,5,56,Spring 2022 - Div C,2022-06-26,India Rebels,Redmond High School Stadium
+88,Avinash Naga,55618,Avinash Naga,caught,GAURAV YAKHMI,RAKESH KUMAR SeattleJaguars,0.0,0.0,10,11.0,18642,5,50,Summer 2021 - Div C,2021-07-25,SeattleJaguars,GrassLawn Park-Softball Field 1
+89,Avinash Naga,55618,Avinash Naga,not out,0,0,0.0,1.0,13,12.0,18711,5,50,Summer 2021 - Div C,2021-08-07,Torpedoes,GrassLawn Park-Softball Field 1
+90,Avinash Naga,55618,Avinash Naga,bowled,0,Goutham Reddy,0.0,0.0,7,0.0,18783,5,50,Summer 2021 - Div C,2021-08-15,Bouncers,Hartman Park-Soccer Field
+91,Avinash Naga,55618,Avinash Naga,not out,0,0,0.0,0.0,0,0.0,18859,5,50,Summer 2021 - Div C,2021-08-28,Super Fit Stallions,North SeaTac Park
+92,Avinash Naga,55618,Avinash Naga,bowled,0,Ashwini Singh,0.0,0.0,4,5.0,17731,6,47,Summer 2019 - Div D,2019-07-13,Eight Musketers,Redmond High School Stadium
+93,Avinash Naga,55618,Avinash Naga,caught,Prashant Blazers,0,0.0,0.0,3,0.0,17955,6,47,Summer 2019 - Div D,2019-08-03,FatehCC-Blazers,Redmond Ridge Park -- Soccer Field
+94,Avinash Naga,55618,Avinash Naga,caught,Supriya Saha,Supriya Saha,0.0,0.0,1,4.0,18006,6,47,Summer 2019 - Div D,2019-08-10,Daredevils CC,Ron Regis
+95,Avinash Naga,55618,Avinash Naga,not out,0,0,0.0,1.0,8,18.0,18256,6,47,Summer 2019 - Div D,2019-09-15,Sidewinders Reloaded,Redmond High School Stadium
+96,Avinash Naga,55618,Avinash Naga,caught,Shiran Sathananthan,Sudeep Malik,0.0,0.0,10,18.0,18383,6,47,Summer 2019 - Div D,2019-10-20,Super Fit stars,North SeaTac Park
+97,Avinash Naga,55618,Avinash Naga,caught,Raj Eight Musk,Harnil Rafalia,0.0,0.0,26,27.0,16352,6,46,Spring 2019 - Div D,2019-04-06,Eight Musketers,Hidden Valley Park Field 1
+98,Avinash Naga,55618,Avinash Naga,not out,0,0,0.0,1.0,25,0.0,16434,6,46,Spring 2019 - Div D,2019-04-13,Team Gryphon,Perigo Park-Softball Field 1
+99,Avinash Naga,55618,Avinash Naga,runout,Shankar M,0,0.0,0.0,0,0.0,16518,6,46,Spring 2019 - Div D,2019-04-21,FatehCC-Blazers,Redmond High School Stadium
+100,Avinash Naga,55618,Avinash Naga,did not bat,0,0,0.0,0.0,0,0.0,16770,6,46,Spring 2019 - Div D,2019-06-15,Gilly,Eastlake High School Stadium
+101,Venkatesh Srinivasan,55617,Venkatesh Srinivasan,runout,Surya Wolfpack,Raju Siruvuri,0.0,0.0,4,10.0,20659,5,59,Spring 2023 - Div C,2023-03-25,Seattle Blues,Meadowdale Multipurpose Field 1
+102,Venkatesh Srinivasan,55617,Venkatesh Srinivasan,did not bat,0,0,0.0,0.0,0,0.0,20744,5,59,Spring 2023 - Div C,2023-04-02,Torpedoes,Ron Regis
+103,Venkatesh Srinivasan,55617,Venkatesh Srinivasan,caught,Rajveer S,Harbir Singh Pannu,0.0,0.0,3,0.0,20004,4,57,Summer 2022 - Div B,2022-07-30,Great Eight,Redmond Ridge Park -- Soccer Field
+104,Venkatesh Srinivasan,55617,Venkatesh Srinivasan,caught,Rithvik Manepalli,Prasanna Kokku,0.0,0.0,0,0.0,19590,5,56,Spring 2022 - Div C,2022-06-19,ATB Stallions,Hidden Valley Park Field 1
+105,Venkatesh Srinivasan,55617,Venkatesh Srinivasan,caught,Srujan Shah,Sumit Dang,0.0,1.0,7,12.0,19798,5,56,Spring 2022 - Div C,2022-06-26,India Rebels,Redmond High School Stadium
+106,Venkatesh Srinivasan,55617,Venkatesh Srinivasan,not out,0,0,0.0,0.0,1,1.0,19862,5,56,Spring 2022 - Div C,2022-07-23,India Rebels,North SeaTac Park
+107,Venkatesh Srinivasan,55617,Venkatesh Srinivasan,caught,Amith Vangala,Viresh Gehlawat,0.0,0.0,9,0.0,18783,5,50,Summer 2021 - Div C,2021-08-15,Bouncers,Hartman Park-Soccer Field
+108,Venkatesh Srinivasan,55617,Venkatesh Srinivasan,caught,Gangadhar Vasupalli,Gangadhar Vasupalli,0.0,1.0,8,7.0,19030,5,50,Summer 2021 - Div C,2021-10-02,Sound8,Marymoor Park Soccer #05
+109,Venkatesh Srinivasan,55617,Venkatesh Srinivasan,caught,Karam Veer,Karam Veer,0.0,0.0,6,10.0,18006,6,47,Summer 2019 - Div D,2019-08-10,Daredevils CC,Ron Regis
+110,Venkatesh Srinivasan,55617,Venkatesh Srinivasan,not out,0,0,2.0,0.0,19,14.0,18116,6,47,Summer 2019 - Div D,2019-08-25,Sheirokom Team,Eastlake High School Stadium
+111,Venkatesh Srinivasan,55617,Venkatesh Srinivasan,caught,Aditya Kandula,Karthik Kakarla,1.0,1.0,16,21.0,18256,6,47,Summer 2019 - Div D,2019-09-15,Sidewinders Reloaded,Redmond High School Stadium
+112,Venkatesh Srinivasan,55617,Venkatesh Srinivasan,caught,Hara Nayak,Sandeep Arora,0.0,0.0,0,1.0,18383,6,47,Summer 2019 - Div D,2019-10-20,Super Fit stars,North SeaTac Park
+113,Venkatesh Srinivasan,55617,Venkatesh Srinivasan,caught,Raj Eight Musk,Shakeeb Sagheer,0.0,0.0,2,4.0,16352,6,46,Spring 2019 - Div D,2019-04-06,Eight Musketers,Hidden Valley Park Field 1
+114,Venkatesh Srinivasan,55617,Venkatesh Srinivasan,caught,Srikanta N,Prashant Blazers,0.0,1.0,7,7.0,16518,6,46,Spring 2019 - Div D,2019-04-21,FatehCC-Blazers,Redmond High School Stadium
+115,Venkatesh Srinivasan,55617,Venkatesh Srinivasan,bowled,0,Vivek Goel,0.0,1.0,13,12.0,16594,6,46,Spring 2019 - Div D,2019-05-19,SEA-Chargers,Marymoor Park Soccer #03
+116,Madhu Paruchuri,62700,Madhu Paruchuri,bowled,0,Nikhil Baireddy,0.0,0.0,3,3.0,20659,5,59,Spring 2023 - Div C,2023-03-25,Seattle Blues,Meadowdale Multipurpose Field 1
+117,Madhu Paruchuri,62700,Madhu Paruchuri,not out,0,0,2.0,3.0,33,17.0,20079,4,57,Summer 2022 - Div B,2022-08-07,Kachraboyzsecond,North SeaTac Park
+118,Madhu Paruchuri,62700,Madhu Paruchuri,caught,Siddharth Likhate,Dhaval Shah,0.0,0.0,24,24.0,20438,4,57,Summer 2022 - Div B,2022-10-08,Torpedoes,Hidden Valley Park Field 1
+119,Madhu Paruchuri,62700,Madhu Paruchuri,caught,Prasanjeet Jena,Sandeep Limaye,0.0,0.0,22,32.0,19367,5,56,Spring 2022 - Div C,2022-04-23,Raftaar,Perigo Park-Softball Field 2
+120,Madhu Paruchuri,62700,Madhu Paruchuri,not out,0,0,0.0,0.0,24,0.0,19483,5,56,Spring 2022 - Div C,2022-05-21,Torpedoes,North SeaTac Park
+121,Madhu Paruchuri,62700,Madhu Paruchuri,caught,Sreenath Diggireddy,Prasanna Kokku,0.0,0.0,30,0.0,19590,5,56,Spring 2022 - Div C,2022-06-19,ATB Stallions,Hidden Valley Park Field 1
+122,Madhu Paruchuri,62700,Madhu Paruchuri,caught,Vaibhav Jain,Keshav Prasad,0.0,2.0,22,18.0,19827,5,56,Spring 2022 - Div C,2022-07-09,Indiawaale,Hartman Park-Soccer Field
+123,Madhu Paruchuri,62700,Madhu Paruchuri,runout,Aakash Shah,0,1.0,5.0,48,21.0,19937,5,56,Spring 2022 - Div C,2022-07-17,Daredevils CC,North SeaTac Park
+124,Madhu Paruchuri,62700,Madhu Paruchuri,caught,Sunny H Pandya,Srujan Shah,0.0,2.0,42,30.0,19862,5,56,Spring 2022 - Div C,2022-07-23,India Rebels,North SeaTac Park
+125,Madhu Paruchuri,62700,Madhu Paruchuri,caught,GAURAV YAKHMI,ANTIM SULTAN,0.0,1.0,15,17.0,18642,5,50,Summer 2021 - Div C,2021-07-25,SeattleJaguars,GrassLawn Park-Softball Field 1
+126,Madhu Paruchuri,62700,Madhu Paruchuri,bowled,0,Nishant R Bhatt,0.0,0.0,22,32.0,18711,5,50,Summer 2021 - Div C,2021-08-07,Torpedoes,GrassLawn Park-Softball Field 1
+127,Madhu Paruchuri,62700,Madhu Paruchuri,caught,Amith Vangala,Viresh Gehlawat,0.0,0.0,4,0.0,18783,5,50,Summer 2021 - Div C,2021-08-15,Bouncers,Hartman Park-Soccer Field
+128,Madhu Paruchuri,62700,Madhu Paruchuri,caught,Anjaneya Malpani,shanthan N,1.0,3.0,71,0.0,18859,5,50,Summer 2021 - Div C,2021-08-28,Super Fit Stallions,North SeaTac Park
+129,Madhu Paruchuri,62700,Madhu Paruchuri,bowled,0,Rohan Jain,0.0,0.0,0,4.0,18964,5,50,Summer 2021 - Div C,2021-09-18,Indiawaale,Hidden Valley Park Field 1
+130,Madhu Paruchuri,62700,Madhu Paruchuri,caught,KK Mohammed,KK Mohammed,2.0,1.0,32,29.0,19030,5,50,Summer 2021 - Div C,2021-10-02,Sound8,Marymoor Park Soccer #05
+131,Phanindra Madduru,50314,Phanindra Madduru,runout,Nishant R Bhatt,0,0.0,0.0,1,6.0,20744,5,59,Spring 2023 - Div C,2023-04-02,Torpedoes,Ron Regis
+132,Phanindra Madduru,50314,Phanindra Madduru,caught,Sai Pirates,Vishnu Vijayagopal,0.0,0.0,2,5.0,20800,5,59,Spring 2023 - Div C,2023-04-09,Pirates of Seattle,North Robinswood Park
+133,Phanindra Madduru,50314,Phanindra Madduru,caught,Rajveer S,Harbir Singh Pannu,0.0,0.0,6,0.0,20004,4,57,Summer 2022 - Div B,2022-07-30,Great Eight,Redmond Ridge Park -- Soccer Field
+134,Phanindra Madduru,50314,Phanindra Madduru,caught,Ravi Samatham,Anand Garpawar,0.0,1.0,9,10.0,20079,4,57,Summer 2022 - Div B,2022-08-07,Kachraboyzsecond,North SeaTac Park
+135,Phanindra Madduru,50314,Phanindra Madduru,caught,Anurag Mangal,Parag Thakre,0.0,0.0,2,6.0,20153,4,57,Summer 2022 - Div B,2022-08-20,Back Breakers,Marymoor Park Soccer #05
+136,Phanindra Madduru,50314,Phanindra Madduru,caught,Banu Pirates of Seattle 3137,Xavier Antony,0.0,0.0,6,15.0,20227,4,57,Summer 2022 - Div B,2022-08-28,Pirates Of Seattle,Marymoor Park Soccer #05
+137,Phanindra Madduru,50314,Phanindra Madduru,not out,0,0,0.0,2.0,25,30.0,20571,4,57,Summer 2022 - Div B,2022-10-15,Seattle United - Supercharged,Hidden Valley Park Field 1
+138,Phanindra Madduru,50314,Phanindra Madduru,not out,0,0,0.0,0.0,11,22.0,19245,5,56,Spring 2022 - Div C,2022-03-27,Takbeer,Hidden Valley Park Field 1
+139,Phanindra Madduru,50314,Phanindra Madduru,not out,0,0,0.0,0.0,5,6.0,19367,5,56,Spring 2022 - Div C,2022-04-23,Raftaar,Perigo Park-Softball Field 2
+140,Phanindra Madduru,50314,Phanindra Madduru,not out,0,0,0.0,0.0,1,0.0,19437,5,56,Spring 2022 - Div C,2022-05-08,Slammers,Hidden Valley Park Field 1
+141,Phanindra Madduru,50314,Phanindra Madduru,caught,Romit Girdhar,0,0.0,0.0,4,0.0,19483,5,56,Spring 2022 - Div C,2022-05-21,Torpedoes,North SeaTac Park
+142,Phanindra Madduru,50314,Phanindra Madduru,not out,0,0,0.0,0.0,3,0.0,19590,5,56,Spring 2022 - Div C,2022-06-19,ATB Stallions,Hidden Valley Park Field 1
+143,Phanindra Madduru,50314,Phanindra Madduru,runout,Sumit Dang,Anurag Datta,0.0,0.0,4,7.0,19798,5,56,Spring 2022 - Div C,2022-06-26,India Rebels,Redmond High School Stadium
+144,Phanindra Madduru,50314,Phanindra Madduru,not out,0,0,0.0,0.0,0,0.0,19827,5,56,Spring 2022 - Div C,2022-07-09,Indiawaale,Hartman Park-Soccer Field
+145,Phanindra Madduru,50314,Phanindra Madduru,not out,0,0,0.0,0.0,2,1.0,19937,5,56,Spring 2022 - Div C,2022-07-17,Daredevils CC,North SeaTac Park
+146,Phanindra Madduru,50314,Phanindra Madduru,caught,Anurag Datta,Yash Rolyan,0.0,0.0,8,8.0,19862,5,56,Spring 2022 - Div C,2022-07-23,India Rebels,North SeaTac Park
+147,Phanindra Madduru,50314,Phanindra Madduru,not out,0,0,0.0,0.0,14,7.0,18642,5,50,Summer 2021 - Div C,2021-07-25,SeattleJaguars,GrassLawn Park-Softball Field 1
+148,Phanindra Madduru,50314,Phanindra Madduru,caught,Dhaval Shah,Nishant R Bhatt,0.0,0.0,0,4.0,18711,5,50,Summer 2021 - Div C,2021-08-07,Torpedoes,GrassLawn Park-Softball Field 1
+149,Phanindra Madduru,50314,Phanindra Madduru,caught,Dhruvv Arora,Sumit Singh,0.0,0.0,4,0.0,18783,5,50,Summer 2021 - Div C,2021-08-15,Bouncers,Hartman Park-Soccer Field
+150,Phanindra Madduru,50314,Phanindra Madduru,bowled,0,Kavi Reddy,0.0,0.0,10,0.0,18859,5,50,Summer 2021 - Div C,2021-08-28,Super Fit Stallions,North SeaTac Park
+151,Phanindra Madduru,50314,Phanindra Madduru,caught,Maqsood Ahamed,Gangadhar Vasupalli,0.0,0.0,6,16.0,19030,5,50,Summer 2021 - Div C,2021-10-02,Sound8,Marymoor Park Soccer #05
+152,Phanindra Madduru,50314,Phanindra Madduru,bowled,0,Ashwini Singh,0.0,0.0,0,7.0,17731,6,47,Summer 2019 - Div D,2019-07-13,Eight Musketers,Redmond High School Stadium
+153,Phanindra Madduru,50314,Phanindra Madduru,runout,Prashant Blazers,0,0.0,0.0,5,0.0,17955,6,47,Summer 2019 - Div D,2019-08-03,FatehCC-Blazers,Redmond Ridge Park -- Soccer Field
+154,Phanindra Madduru,50314,Phanindra Madduru,caught,Nitesh Dwivedi,Nitesh Dwivedi,0.0,1.0,9,14.0,18006,6,47,Summer 2019 - Div D,2019-08-10,Daredevils CC,Ron Regis
+155,Phanindra Madduru,50314,Phanindra Madduru,caught,Prafull Bhosale,Prafull Bhosale,0.0,0.0,0,1.0,18256,6,47,Summer 2019 - Div D,2019-09-15,Sidewinders Reloaded,Redmond High School Stadium
+156,Phanindra Madduru,50314,Phanindra Madduru,caught,Sanjeev Khanna,Nishant R Bhatt,0.0,1.0,7,14.0,18315,6,47,Summer 2019 - Div D,2019-09-29,Torpedoes,Shoreline Ground
+157,Phanindra Madduru,50314,Phanindra Madduru,caught,Shriram Natarajan,Sandeep Arora,0.0,0.0,2,3.0,18383,6,47,Summer 2019 - Div D,2019-10-20,Super Fit stars,North SeaTac Park
+158,Phanindra Madduru,50314,Phanindra Madduru,caught,Saketh Varma S,Saptarishi Dey,0.0,0.0,16,0.0,16264,6,46,Spring 2019 - Div D,2019-03-24,Crime Masters Gogo,Redmond High School Stadium
+159,Phanindra Madduru,50314,Phanindra Madduru,not out,0,0,0.0,0.0,3,2.0,16352,6,46,Spring 2019 - Div D,2019-04-06,Eight Musketers,Hidden Valley Park Field 1
+160,Phanindra Madduru,50314,Phanindra Madduru,caught,Sarath Chandra,Guru S,0.0,0.0,7,0.0,16434,6,46,Spring 2019 - Div D,2019-04-13,Team Gryphon,Perigo Park-Softball Field 1
+161,Phanindra Madduru,50314,Phanindra Madduru,caught,Arun C,Guru Vignesh,0.0,0.0,0,1.0,16518,6,46,Spring 2019 - Div D,2019-04-21,FatehCC-Blazers,Redmond High School Stadium
+162,Phanindra Madduru,50314,Phanindra Madduru,caught,Anil Gandham,Vivek Goel,0.0,0.0,0,2.0,16594,6,46,Spring 2019 - Div D,2019-05-19,SEA-Chargers,Marymoor Park Soccer #03
+163,Phanindra Madduru,50314,Phanindra Madduru,caught,Karthick Krishnamurthy,Xavier Antony,0.0,0.0,0,0.0,16687,6,46,Spring 2019 - Div D,2019-06-02,Pirates of Seattle,North Robinswood Park
+164,Phanindra Madduru,50314,Phanindra Madduru,caught,Subramaniam Turuvekere Seetharam,Uday Unni,0.0,0.0,9,0.0,16770,6,46,Spring 2019 - Div D,2019-06-15,Gilly,Eastlake High School Stadium
+165,Rajiv Marothu,57070,Rajiv Marothu,bowled,0,Raju Siruvuri,0.0,0.0,0,3.0,20659,5,59,Spring 2023 - Div C,2023-03-25,Seattle Blues,Meadowdale Multipurpose Field 1
+166,Rajiv Marothu,57070,Rajiv Marothu,caught,Siddharth Likhate,Dhaval Shah,0.0,0.0,3,3.0,20744,5,59,Spring 2023 - Div C,2023-04-02,Torpedoes,Ron Regis
+167,Rajiv Marothu,57070,Rajiv Marothu,not out,0,0,0.0,0.0,7,6.0,20079,4,57,Summer 2022 - Div B,2022-08-07,Kachraboyzsecond,North SeaTac Park
+168,Rajiv Marothu,57070,Rajiv Marothu,runout,Pravi Garg,0,0.0,0.0,10,15.0,20153,4,57,Summer 2022 - Div B,2022-08-20,Back Breakers,Marymoor Park Soccer #05
+169,Rajiv Marothu,57070,Rajiv Marothu,caught,Banu Pirates of Seattle 3137,Varada Saiprasath,0.0,0.0,8,25.0,20227,4,57,Summer 2022 - Div B,2022-08-28,Pirates Of Seattle,Marymoor Park Soccer #05
+170,Rajiv Marothu,57070,Rajiv Marothu,not out,0,0,1.0,2.0,46,42.0,20302,4,57,Summer 2022 - Div B,2022-09-11,Stingrays,Ron Regis
+171,Rajiv Marothu,57070,Rajiv Marothu,bowled,0,Nishant R Bhatt,0.0,0.0,2,6.0,20438,4,57,Summer 2022 - Div B,2022-10-08,Torpedoes,Hidden Valley Park Field 1
+172,Rajiv Marothu,57070,Rajiv Marothu,caught,Muralidhar Sathsahayaraman.,0,0.0,0.0,2,10.0,19227,5,56,Spring 2022 - Div C,2022-03-19,Northern Thunder,Hidden Valley Park Field 1
+173,Rajiv Marothu,57070,Rajiv Marothu,caught,Rithvik Manepalli,Sreenath Diggireddy,0.0,0.0,4,0.0,19590,5,56,Spring 2022 - Div C,2022-06-19,ATB Stallions,Hidden Valley Park Field 1
+174,Rajiv Marothu,57070,Rajiv Marothu,bowled,0,Sitanshu Maheshwari,1.0,0.0,12,12.0,19798,5,56,Spring 2022 - Div C,2022-06-26,India Rebels,Redmond High School Stadium
+175,Rajiv Marothu,57070,Rajiv Marothu,caught,Vaibhav Jain,Keshav Prasad,0.0,0.0,0,2.0,19827,5,56,Spring 2022 - Div C,2022-07-09,Indiawaale,Hartman Park-Soccer Field
+176,Rajiv Marothu,57070,Rajiv Marothu,caught,Gaurav Kapila,Gaurav Kapila,1.0,0.0,13,16.0,19937,5,56,Spring 2022 - Div C,2022-07-17,Daredevils CC,North SeaTac Park
+177,Rajiv Marothu,57070,Rajiv Marothu,caught,Sunny H Pandya,Sitanshu Maheshwari,1.0,1.0,18,21.0,19862,5,56,Spring 2022 - Div C,2022-07-23,India Rebels,North SeaTac Park
+178,Rajiv Marothu,57070,Rajiv Marothu,not out,0,0,0.0,0.0,4,15.0,18569,5,50,Summer 2021 - Div C,2021-07-11,Seattle Gems,Perigo Park-Softball Field 1
+179,Rajiv Marothu,57070,Rajiv Marothu,caught,ANTIM SULTAN,ANTIM SULTAN,1.0,0.0,8,4.0,18642,5,50,Summer 2021 - Div C,2021-07-25,SeattleJaguars,GrassLawn Park-Softball Field 1
+180,Rajiv Marothu,57070,Rajiv Marothu,bowled,0,Gaurav Bhatnagar,0.0,0.0,8,18.0,18711,5,50,Summer 2021 - Div C,2021-08-07,Torpedoes,GrassLawn Park-Softball Field 1
+181,Rajiv Marothu,57070,Rajiv Marothu,caught,Sreenath Diggireddy,shanthan N,0.0,1.0,8,0.0,18859,5,50,Summer 2021 - Div C,2021-08-28,Super Fit Stallions,North SeaTac Park
+182,Rajiv Marothu,57070,Rajiv Marothu,caught,Keshav Prasad,Shaadab Alam,2.0,2.0,27,29.0,18964,5,50,Summer 2021 - Div C,2021-09-18,Indiawaale,Hidden Valley Park Field 1
+183,Rajiv Marothu,57070,Rajiv Marothu,caught,Irfan Mohammad,Maqsood Ahamed,2.0,2.0,36,35.0,19030,5,50,Summer 2021 - Div C,2021-10-02,Sound8,Marymoor Park Soccer #05
+184,Rajiv Marothu,57070,Rajiv Marothu,caught,Chintan Patel,Ashwini Singh,0.0,1.0,11,20.0,17731,6,47,Summer 2019 - Div D,2019-07-13,Eight Musketers,Redmond High School Stadium
+185,Rajiv Marothu,57070,Rajiv Marothu,bowled,0,0,0.0,0.0,4,0.0,17955,6,47,Summer 2019 - Div D,2019-08-03,FatehCC-Blazers,Redmond Ridge Park -- Soccer Field
+186,Rajiv Marothu,57070,Rajiv Marothu,not out,0,0,0.0,0.0,1,1.0,18006,6,47,Summer 2019 - Div D,2019-08-10,Daredevils CC,Ron Regis
+187,Rajiv Marothu,57070,Rajiv Marothu,not out,0,0,0.0,0.0,2,3.0,18383,6,47,Summer 2019 - Div D,2019-10-20,Super Fit stars,North SeaTac Park
+188,Rajiv Marothu,57070,Rajiv Marothu,bowled,0,Saptarishi Dey,0.0,0.0,0,0.0,16264,6,46,Spring 2019 - Div D,2019-03-24,Crime Masters Gogo,Redmond High School Stadium
+189,Rajiv Marothu,57070,Rajiv Marothu,caught,Raj Eight Musk,Harnil Rafalia,0.0,0.0,2,5.0,16352,6,46,Spring 2019 - Div D,2019-04-06,Eight Musketers,Hidden Valley Park Field 1
+190,Rajiv Marothu,57070,Rajiv Marothu,caught,Sarath Chandra,Pradeep Voona,0.0,0.0,4,0.0,16434,6,46,Spring 2019 - Div D,2019-04-13,Team Gryphon,Perigo Park-Softball Field 1
+191,Rajiv Marothu,57070,Rajiv Marothu,bowled,0,Jaswanth Katragadda,0.0,0.0,11,20.0,16594,6,46,Spring 2019 - Div D,2019-05-19,SEA-Chargers,Marymoor Park Soccer #03
+192,Rajiv Marothu,57070,Rajiv Marothu,caught,Santosh Pirates of Seattle 12305,Hari Pirates of Seattle 5026,0.0,0.0,10,0.0,16687,6,46,Spring 2019 - Div D,2019-06-02,Pirates of Seattle,North Robinswood Park
+193,Rajiv Marothu,57070,Rajiv Marothu,caught,Subramaniam Turuvekere Seetharam,Uday Unni,0.0,0.0,1,0.0,16770,6,46,Spring 2019 - Div D,2019-06-15,Gilly,Eastlake High School Stadium
+194,Krishna Ykc,64775,Krishna Ykc,caught,Surya Wolfpack,Raju Siruvuri,0.0,0.0,2,4.0,20659,5,59,Spring 2023 - Div C,2023-03-25,Seattle Blues,Meadowdale Multipurpose Field 1
+195,Anirudh Tadakamalla,64302,Anirudh Tadakamalla,did not bat,0,0,0.0,0.0,0,0.0,20744,5,59,Spring 2023 - Div C,2023-04-02,Torpedoes,Ron Regis
+196,Anirudh Tadakamalla,64302,Anirudh Tadakamalla,runout,Kirtimoy Pirates,0,0.0,0.0,1,3.0,20800,5,59,Spring 2023 - Div C,2023-04-09,Pirates of Seattle,North Robinswood Park
+197,Anirudh Tadakamalla,64302,Anirudh Tadakamalla,not out,0,0,0.0,0.0,3,5.0,20227,4,57,Summer 2022 - Div B,2022-08-28,Pirates Of Seattle,Marymoor Park Soccer #05
+198,Kowshik Goud,63316,Kowshik Goud,caught,Kirtimoy Pirates,Varada Saiprasath,0.0,0.0,1,5.0,20800,5,59,Spring 2023 - Div C,2023-04-09,Pirates of Seattle,North Robinswood Park
+199,Kowshik Goud,63316,Kowshik Goud,bowled,0,Jatinder Singh Dhillon,0.0,0.0,4,0.0,20004,4,57,Summer 2022 - Div B,2022-07-30,Great Eight,Redmond Ridge Park -- Soccer Field
+200,Kowshik Goud,63316,Kowshik Goud,bowled,0,Pravi Garg,0.0,0.0,15,22.0,20153,4,57,Summer 2022 - Div B,2022-08-20,Back Breakers,Marymoor Park Soccer #05
+201,Kowshik Goud,63316,Kowshik Goud,caught,Amit Agarwal,Dineshkumar Damodharan,0.0,1.0,5,4.0,20302,4,57,Summer 2022 - Div B,2022-09-11,Stingrays,Ron Regis
+202,Kowshik Goud,63316,Kowshik Goud,retired hurt,0,0,0.0,0.0,16,14.0,19227,5,56,Spring 2022 - Div C,2022-03-19,Northern Thunder,Hidden Valley Park Field 1
+203,Kowshik Goud,63316,Kowshik Goud,bowled,0,Aashish Bhateja,0.0,0.0,1,4.0,19367,5,56,Spring 2022 - Div C,2022-04-23,Raftaar,Perigo Park-Softball Field 2
+204,Kowshik Goud,63316,Kowshik Goud,bowled,0,Aashwin Kumaar Goda,0.0,0.0,14,0.0,19437,5,56,Spring 2022 - Div C,2022-05-08,Slammers,Hidden Valley Park Field 1
+205,Kowshik Goud,63316,Kowshik Goud,caught,Satvir Arora,0,0.0,0.0,25,0.0,19483,5,56,Spring 2022 - Div C,2022-05-21,Torpedoes,North SeaTac Park
+206,Kowshik Goud,63316,Kowshik Goud,caught,Sreenath Diggireddy,shanthan N,0.0,0.0,7,0.0,19590,5,56,Spring 2022 - Div C,2022-06-19,ATB Stallions,Hidden Valley Park Field 1
+207,Kowshik Goud,63316,Kowshik Goud,not out,0,0,0.0,1.0,12,13.0,19798,5,56,Spring 2022 - Div C,2022-06-26,India Rebels,Redmond High School Stadium
+208,Kowshik Goud,63316,Kowshik Goud,bowled,0,Rohan Jain,0.0,0.0,3,11.0,19827,5,56,Spring 2022 - Div C,2022-07-09,Indiawaale,Hartman Park-Soccer Field
+209,Kowshik Goud,63316,Kowshik Goud,caught,Jeyakumar Pounraj,Jeyakumar Pounraj,0.0,0.0,7,15.0,19937,5,56,Spring 2022 - Div C,2022-07-17,Daredevils CC,North SeaTac Park
+210,Kowshik Goud,63316,Kowshik Goud,runout,Akshay Bhatkar,Srujan Shah,0.0,0.0,4,4.0,19862,5,56,Spring 2022 - Div C,2022-07-23,India Rebels,North SeaTac Park
+211,Shashank Murthy,55615,Shashank Murthy,not out,0,0,0.0,0.0,6,0.0,20004,4,57,Summer 2022 - Div B,2022-07-30,Great Eight,Redmond Ridge Park -- Soccer Field
+212,Shashank Murthy,55615,Shashank Murthy,not out,0,0,0.0,2.0,13,9.0,19227,5,56,Spring 2022 - Div C,2022-03-19,Northern Thunder,Hidden Valley Park Field 1
+213,Shashank Murthy,55615,Shashank Murthy,caught,Aashish Bhateja,Sandeep Limaye,0.0,0.0,16,9.0,19367,5,56,Spring 2022 - Div C,2022-04-23,Raftaar,Perigo Park-Softball Field 2
+214,Shashank Murthy,55615,Shashank Murthy,caught,Raj Slammerteam,Aashwin Kumaar Goda,0.0,0.0,16,0.0,19437,5,56,Spring 2022 - Div C,2022-05-08,Slammers,Hidden Valley Park Field 1
+215,Shashank Murthy,55615,Shashank Murthy,not out,0,0,0.0,0.0,0,0.0,19483,5,56,Spring 2022 - Div C,2022-05-21,Torpedoes,North SeaTac Park
+216,Shashank Murthy,55615,Shashank Murthy,runout,shanthan N,shanthan N,0.0,0.0,16,0.0,19590,5,56,Spring 2022 - Div C,2022-06-19,ATB Stallions,Hidden Valley Park Field 1
+217,Shashank Murthy,55615,Shashank Murthy,caught,Sumit Dang,Sitanshu Maheshwari,0.0,0.0,2,6.0,19798,5,56,Spring 2022 - Div C,2022-06-26,India Rebels,Redmond High School Stadium
+218,Shashank Murthy,55615,Shashank Murthy,bowled,0,Keshav Prasad,0.0,0.0,3,8.0,19827,5,56,Spring 2022 - Div C,2022-07-09,Indiawaale,Hartman Park-Soccer Field
+219,Shashank Murthy,55615,Shashank Murthy,runout,Aakash Shah,0,3.0,2.0,37,15.0,19937,5,56,Spring 2022 - Div C,2022-07-17,Daredevils CC,North SeaTac Park
+220,Shashank Murthy,55615,Shashank Murthy,retired hurt,0,0,0.0,2.0,13,12.0,19862,5,56,Spring 2022 - Div C,2022-07-23,India Rebels,North SeaTac Park
+221,Shashank Murthy,55615,Shashank Murthy,caught,GAURAV YAKHMI,RAKESH KUMAR SeattleJaguars,0.0,0.0,4,5.0,18642,5,50,Summer 2021 - Div C,2021-07-25,SeattleJaguars,GrassLawn Park-Softball Field 1
+222,Shashank Murthy,55615,Shashank Murthy,caught,Nishant R Bhatt,Gaurav Bhatnagar,0.0,0.0,3,5.0,18711,5,50,Summer 2021 - Div C,2021-08-07,Torpedoes,GrassLawn Park-Softball Field 1
+223,Shashank Murthy,55615,Shashank Murthy,bowled,0,Kashish Babbar,0.0,0.0,6,0.0,18783,5,50,Summer 2021 - Div C,2021-08-15,Bouncers,Hartman Park-Soccer Field
+224,Shashank Murthy,55615,Shashank Murthy,not out,0,0,0.0,0.0,4,4.0,19030,5,50,Summer 2021 - Div C,2021-10-02,Sound8,Marymoor Park Soccer #05
+225,Shashank Murthy,55615,Shashank Murthy,bowled,0,Aneesh D,0.0,2.0,18,30.0,18256,6,47,Summer 2019 - Div D,2019-09-15,Sidewinders Reloaded,Redmond High School Stadium
+226,Shashank Murthy,55615,Shashank Murthy,not out,0,0,1.0,0.0,21,30.0,18315,6,47,Summer 2019 - Div D,2019-09-29,Torpedoes,Shoreline Ground
+227,Shashank Murthy,55615,Shashank Murthy,caught,Shriram Natarajan,Jackson Staney Julius,0.0,0.0,20,27.0,18383,6,47,Summer 2019 - Div D,2019-10-20,Super Fit stars,North SeaTac Park
+228,Shashank Murthy,55615,Shashank Murthy,runout,Anirudh Yerrapragada,Seshu K,0.0,0.0,2,0.0,16434,6,46,Spring 2019 - Div D,2019-04-13,Team Gryphon,Perigo Park-Softball Field 1
+229,Shashank Murthy,55615,Shashank Murthy,not out,0,0,0.0,0.0,17,0.0,16687,6,46,Spring 2019 - Div D,2019-06-02,Pirates of Seattle,North Robinswood Park
+230,Shashank Murthy,55615,Shashank Murthy,caught,Subramaniam Turuvekere Seetharam,Sagar Kulkarni,0.0,2.0,13,0.0,16770,6,46,Spring 2019 - Div D,2019-06-15,Gilly,Eastlake High School Stadium
+231,Chiranjeevi Nagireddy,62701,Chiranjeevi Nagireddy,caught,Anurag Mangal,Parag Thakre,0.0,0.0,3,11.0,20153,4,57,Summer 2022 - Div B,2022-08-20,Back Breakers,Marymoor Park Soccer #05
+232,Chiranjeevi Nagireddy,62701,Chiranjeevi Nagireddy,caught,Dipankar SR,Dineshkumar Damodharan,0.0,0.0,0,2.0,20302,4,57,Summer 2022 - Div B,2022-09-11,Stingrays,Ron Regis
+233,Chiranjeevi Nagireddy,62701,Chiranjeevi Nagireddy,caught,Nishant R Bhatt,Orko Momin,0.0,0.0,0,6.0,20438,4,57,Summer 2022 - Div B,2022-10-08,Torpedoes,Hidden Valley Park Field 1
+234,Chiranjeevi Nagireddy,62701,Chiranjeevi Nagireddy,runout,Sandeep Limaye,Jeet Mody,0.0,0.0,1,6.0,19367,5,56,Spring 2022 - Div C,2022-04-23,Raftaar,Perigo Park-Softball Field 2
+235,Chiranjeevi Nagireddy,62701,Chiranjeevi Nagireddy,not out,0,0,0.0,0.0,0,0.0,19590,5,56,Spring 2022 - Div C,2022-06-19,ATB Stallions,Hidden Valley Park Field 1
+236,Chiranjeevi Nagireddy,62701,Chiranjeevi Nagireddy,caught,Rakshith Halevoor Prabhachand,Anurag Datta,0.0,0.0,2,8.0,19798,5,56,Spring 2022 - Div C,2022-06-26,India Rebels,Redmond High School Stadium
+237,Chiranjeevi Nagireddy,62701,Chiranjeevi Nagireddy,bowled,0,Sunil Nair,0.0,0.0,3,6.0,18569,5,50,Summer 2021 - Div C,2021-07-11,Seattle Gems,Perigo Park-Softball Field 1
+238,Chiranjeevi Nagireddy,62701,Chiranjeevi Nagireddy,runout,RAJESH SABALE,0,0.0,0.0,3,2.0,18642,5,50,Summer 2021 - Div C,2021-07-25,SeattleJaguars,GrassLawn Park-Softball Field 1
+239,Chiranjeevi Nagireddy,62701,Chiranjeevi Nagireddy,caught,Yogesh Bedwal,Gaurav Bhatnagar,0.0,0.0,4,8.0,18711,5,50,Summer 2021 - Div C,2021-08-07,Torpedoes,GrassLawn Park-Softball Field 1
+240,Siva Chaitanya Yalamanchili,64300,Siva Chaitanya Yalamanchili,caught,Anurag Mangal,Sumit Tare,0.0,0.0,3,6.0,20153,4,57,Summer 2022 - Div B,2022-08-20,Back Breakers,Marymoor Park Soccer #05
+241,Aviraj Sawant,64427,Aviraj Sawant,bowled,0,Gangadhar Myrmidons,0.0,0.0,1,3.0,20438,4,57,Summer 2022 - Div B,2022-10-08,Torpedoes,Hidden Valley Park Field 1
+242,Animesh Tiwari,63314,Animesh Tiwari,caught,Rajveer S,Harbir Singh Pannu,0.0,0.0,0,0.0,20004,4,57,Summer 2022 - Div B,2022-07-30,Great Eight,Redmond Ridge Park -- Soccer Field
+243,Animesh Tiwari,63314,Animesh Tiwari,not out,0,0,0.0,0.0,0,0.0,19437,5,56,Spring 2022 - Div C,2022-05-08,Slammers,Hidden Valley Park Field 1
+244,Krishna Goli,64301,Krishna Goli,runout,Gangadhar Myrmidons,Dhaval Shah,0.0,0.0,0,1.0,20438,4,57,Summer 2022 - Div B,2022-10-08,Torpedoes,Hidden Valley Park Field 1
+245,Yash Patil,64428,Yash Patil,bowled,0,Vishnu Vijayagopal,0.0,0.0,0,3.0,20227,4,57,Summer 2022 - Div B,2022-08-28,Pirates Of Seattle,Marymoor Park Soccer #05
+246,Siva Paturi,53097,Siva Paturi,not out,0,0,0.0,0.0,3,7.0,18569,5,50,Summer 2021 - Div C,2021-07-11,Seattle Gems,Perigo Park-Softball Field 1
+247,Siva Paturi,53097,Siva Paturi,caught,Sreenath Diggireddy,Akhil G,0.0,0.0,0,0.0,18859,5,50,Summer 2021 - Div C,2021-08-28,Super Fit Stallions,North SeaTac Park
+248,Siva Paturi,53097,Siva Paturi,not out,0,0,0.0,1.0,36,45.0,18315,6,47,Summer 2019 - Div D,2019-09-29,Torpedoes,Shoreline Ground
+249,Siva Paturi,53097,Siva Paturi,bowled,0,Saketh Varma S,0.0,0.0,10,0.0,16264,6,46,Spring 2019 - Div D,2019-03-24,Crime Masters Gogo,Redmond High School Stadium
+250,Arjun Reddy Toom,57072,Arjun Reddy Toom,bowled,0,Tejas Wavde,0.0,0.0,0,0.0,18783,5,50,Summer 2021 - Div C,2021-08-15,Bouncers,Hartman Park-Soccer Field
+251,Arjun Reddy Toom,57072,Arjun Reddy Toom,caught,Gaurav Kapila,Gaurav Kapila,0.0,0.0,4,6.0,18006,6,47,Summer 2019 - Div D,2019-08-10,Daredevils CC,Ron Regis
+252,Arjun Reddy Toom,57072,Arjun Reddy Toom,bowled,0,Prafull Bhosale,0.0,0.0,0,9.0,18256,6,47,Summer 2019 - Div D,2019-09-15,Sidewinders Reloaded,Redmond High School Stadium
+253,Arjun Reddy Toom,57072,Arjun Reddy Toom,not out,0,0,0.0,0.0,4,0.0,16264,6,46,Spring 2019 - Div D,2019-03-24,Crime Masters Gogo,Redmond High School Stadium
+254,Arjun Reddy Toom,57072,Arjun Reddy Toom,bowled,0,Shankar M,0.0,0.0,0,2.0,16518,6,46,Spring 2019 - Div D,2019-04-21,FatehCC-Blazers,Redmond High School Stadium
+255,Arjun Reddy Toom,57072,Arjun Reddy Toom,bowled,0,Hari Pirates of Seattle 5026,0.0,0.0,2,0.0,16687,6,46,Spring 2019 - Div D,2019-06-02,Pirates of Seattle,North Robinswood Park
+256,Srinivas Potluri,57069,Srinivas Potluri,caught,Ashwini Singh,Harnil Rafalia,0.0,1.0,7,5.0,17731,6,47,Summer 2019 - Div D,2019-07-13,Eight Musketers,Redmond High School Stadium
+257,Srinivas Potluri,57069,Srinivas Potluri,not out,0,0,1.0,2.0,29,20.0,17852,6,47,Summer 2019 - Div D,2019-07-27,Renton Dare Devils,GrassLawn Park-Softball Field 2
+258,Srinivas Potluri,57069,Srinivas Potluri,caught,Prashant Blazers,0,1.0,2.0,18,0.0,17955,6,47,Summer 2019 - Div D,2019-08-03,FatehCC-Blazers,Redmond Ridge Park -- Soccer Field
+259,Srinivas Potluri,57069,Srinivas Potluri,caught,Gaurav Kapila,Gaurav Kapila,0.0,1.0,5,9.0,18006,6,47,Summer 2019 - Div D,2019-08-10,Daredevils CC,Ron Regis
+260,Srinivas Potluri,57069,Srinivas Potluri,caught,Aditya Kandula,Abhishek Kumar,0.0,0.0,1,4.0,18256,6,47,Summer 2019 - Div D,2019-09-15,Sidewinders Reloaded,Redmond High School Stadium
+261,Srinivas Potluri,57069,Srinivas Potluri,caught,Milind Solage,Sanjeev Khanna,0.0,0.0,2,3.0,18315,6,47,Summer 2019 - Div D,2019-09-29,Torpedoes,Shoreline Ground
+262,Srinivas Potluri,57069,Srinivas Potluri,bowled,0,Sudeep Malik,0.0,0.0,13,12.0,18383,6,47,Summer 2019 - Div D,2019-10-20,Super Fit stars,North SeaTac Park
+263,Srinivas Potluri,57069,Srinivas Potluri,caught,Ishan Narang,Saketh Varma S,0.0,0.0,0,0.0,16264,6,46,Spring 2019 - Div D,2019-03-24,Crime Masters Gogo,Redmond High School Stadium
+264,Srinivas Potluri,57069,Srinivas Potluri,not out,0,0,3.0,2.0,40,42.0,16352,6,46,Spring 2019 - Div D,2019-04-06,Eight Musketers,Hidden Valley Park Field 1
+265,Srinivas Potluri,57069,Srinivas Potluri,caught,Sudheer J,Anirudh Yerrapragada,0.0,0.0,5,0.0,16434,6,46,Spring 2019 - Div D,2019-04-13,Team Gryphon,Perigo Park-Softball Field 1
+266,Srinivas Potluri,57069,Srinivas Potluri,caught,Raj Blazers,Srikanta N,1.0,2.0,27,33.0,16518,6,46,Spring 2019 - Div D,2019-04-21,FatehCC-Blazers,Redmond High School Stadium
+267,Srinivas Potluri,57069,Srinivas Potluri,caught,Anil Gandham,Vivek Goel,1.0,2.0,28,26.0,16594,6,46,Spring 2019 - Div D,2019-05-19,SEA-Chargers,Marymoor Park Soccer #03
+268,Srinivas Potluri,57069,Srinivas Potluri,caught,Banu Pirates of Seattle 3137,Xavier Antony,0.0,0.0,29,0.0,16687,6,46,Spring 2019 - Div D,2019-06-02,Pirates of Seattle,North Robinswood Park
+269,Srinivas Potluri,57069,Srinivas Potluri,caught,Venkat Gandhi,Uday Unni,0.0,1.0,5,0.0,16770,6,46,Spring 2019 - Div D,2019-06-15,Gilly,Eastlake High School Stadium
+270,Bhargava NV,60166,Bhargava NV,caught,Gaurav Kapila,Gaurav Kapila,0.0,0.0,30,37.0,18006,6,47,Summer 2019 - Div D,2019-08-10,Daredevils CC,Ron Regis
+271,Sudheer CC,57073,Sudheer CC,not out,0,0,0.0,0.0,0,0.0,17955,6,47,Summer 2019 - Div D,2019-08-03,FatehCC-Blazers,Redmond Ridge Park -- Soccer Field
+272,Sudheer CC,57073,Sudheer CC,not out,0,0,0.0,1.0,6,6.0,18256,6,47,Summer 2019 - Div D,2019-09-15,Sidewinders Reloaded,Redmond High School Stadium
+273,Sudheer CC,57073,Sudheer CC,bowled,0,Vivek Goel,0.0,1.0,10,10.0,16594,6,46,Spring 2019 - Div D,2019-05-19,SEA-Chargers,Marymoor Park Soccer #03
+274,Vamsi Cc,59936,Vamsi Cc,not out,0,0,0.0,0.0,0,3.0,17731,6,47,Summer 2019 - Div D,2019-07-13,Eight Musketers,Redmond High School Stadium
+275,Vamsi Cc,59936,Vamsi Cc,bowled,0,0,0.0,0.0,2,0.0,17955,6,47,Summer 2019 - Div D,2019-08-03,FatehCC-Blazers,Redmond Ridge Park -- Soccer Field
+276,Karthik CC,60129,Karthik CC,runout,Prashant Blazers,0,0.0,0.0,1,0.0,17955,6,47,Summer 2019 - Div D,2019-08-03,FatehCC-Blazers,Redmond Ridge Park -- Soccer Field
+277,Pavan CC,54469,Pavan CC,not out,0,0,0.0,0.0,4,10.0,16518,6,46,Spring 2019 - Div D,2019-04-21,FatehCC-Blazers,Redmond High School Stadium
+278,Pavan CC,54469,Pavan CC,bowled,0,Raj Perala,0.0,0.0,0,1.0,16594,6,46,Spring 2019 - Div D,2019-05-19,SEA-Chargers,Marymoor Park Soccer #03
+279,Pavan CC,54469,Pavan CC,caught,Santosh Pirates of Seattle 12305,Varada Saiprasath,0.0,0.0,3,0.0,16687,6,46,Spring 2019 - Div D,2019-06-02,Pirates of Seattle,North Robinswood Park
+</div>
+    </body>
+</html>

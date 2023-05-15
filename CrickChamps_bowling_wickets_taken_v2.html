@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>PivotTable.js</title>
+
+        <!-- external libs from cdnjs -->
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
+
+
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/d3_renderers.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/c3_renderers.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/export_renderers.min.js"></script>
+
+        <style>
+            body {font-family: Verdana;}
+            .node {
+              border: solid 1px white;
+              font: 10px sans-serif;
+              line-height: 12px;
+              overflow: hidden;
+              position: absolute;
+              text-indent: 2px;
+            }
+            .c3-line, .c3-focused {stroke-width: 3px !important;}
+            .c3-bar {stroke: white !important; stroke-width: 1;}
+            .c3 text { font-size: 12px; color: grey;}
+            .tick line {stroke: white;}
+            .c3-axis path {stroke: grey;}
+            .c3-circle { opacity: 1 !important; }
+            .c3-xgrid-focus {visibility: hidden !important;}
+        </style>
+    </head>
+    <body>
+        <script type="text/javascript">
+            $(function(){
+                if(window.location != window.parent.location)
+                    $("<a>", {target:"_blank", href:""})
+                        .text("[pop out]").prependTo($("body"));
+
+                $("#output").pivotUI(
+                    $.csv.toArrays($("#output").text()),
+                    $.extend({
+                        renderers: $.extend(
+                            $.pivotUtilities.renderers,
+                            $.pivotUtilities.c3_renderers,
+                            $.pivotUtilities.d3_renderers,
+                            $.pivotUtilities.export_renderers
+                            ),
+                        hiddenAttributes: [""]
+                    }, {"rows": ["match_date"], "cols": ["Player"], "vals": ["Wicket"], "aggregatorName": "Sum", "rendererName": "Bar Chart", "menuLimit": 50, "showUI": false})
+                ).show();
+             });
+        </script>
+        <div id="output" style="display: none;">,Player,Player_Id,Bowler,Overs,Maiden,No_Balls,Wide,Runs,Wicket,match_id,league_id,season_id,season,match_date,opposition,ground
+0,Avinash Naga,55618,Avinash Naga,4.0,0.0,0.0,0.0,16,1,20659,5,59,Spring 2023 - Div C,2023-03-25,Seattle Blues,Meadowdale Multipurpose Field 1
+1,Avinash Naga,55618,Avinash Naga,4.0,0.0,0.0,0.0,20,2,20800,5,59,Spring 2023 - Div C,2023-04-09,Pirates of Seattle,North Robinswood Park
+2,Avinash Naga,55618,Avinash Naga,2.0,0.0,0.0,0.0,7,0,20004,4,57,Summer 2022 - Div B,2022-07-30,Great Eight,Redmond Ridge Park -- Soccer Field
+3,Avinash Naga,55618,Avinash Naga,4.0,0.0,1.0,2.0,29,0,20153,4,57,Summer 2022 - Div B,2022-08-20,Back Breakers,Marymoor Park Soccer #05
+4,Avinash Naga,55618,Avinash Naga,4.0,0.0,0.0,0.0,15,2,20302,4,57,Summer 2022 - Div B,2022-09-11,Stingrays,Ron Regis
+5,Avinash Naga,55618,Avinash Naga,4.0,0.0,0.0,0.0,19,3,19227,5,56,Spring 2022 - Div C,2022-03-19,Northern Thunder,Hidden Valley Park Field 1
+6,Avinash Naga,55618,Avinash Naga,3.4,0.0,1.0,0.0,5,2,19245,5,56,Spring 2022 - Div C,2022-03-27,Takbeer,Hidden Valley Park Field 1
+7,Avinash Naga,55618,Avinash Naga,3.0,0.0,0.0,1.0,14,2,19367,5,56,Spring 2022 - Div C,2022-04-23,Raftaar,Perigo Park-Softball Field 2
+8,Avinash Naga,55618,Avinash Naga,4.0,0.0,0.0,0.0,18,2,19437,5,56,Spring 2022 - Div C,2022-05-08,Slammers,Hidden Valley Park Field 1
+9,Avinash Naga,55618,Avinash Naga,3.0,0.0,0.0,0.0,17,2,19483,5,56,Spring 2022 - Div C,2022-05-21,Torpedoes,North SeaTac Park
+10,Avinash Naga,55618,Avinash Naga,4.0,0.0,0.0,2.0,20,1,19590,5,56,Spring 2022 - Div C,2022-06-19,ATB Stallions,Hidden Valley Park Field 1
+11,Avinash Naga,55618,Avinash Naga,4.0,0.0,0.0,0.0,26,0,19798,5,56,Spring 2022 - Div C,2022-06-26,India Rebels,Redmond High School Stadium
+12,Avinash Naga,55618,Avinash Naga,2.0,0.0,0.0,1.0,5,1,19827,5,56,Spring 2022 - Div C,2022-07-09,Indiawaale,Hartman Park-Soccer Field
+13,Avinash Naga,55618,Avinash Naga,3.0,0.0,0.0,1.0,17,1,19937,5,56,Spring 2022 - Div C,2022-07-17,Daredevils CC,North SeaTac Park
+14,Avinash Naga,55618,Avinash Naga,2.0,0.0,0.0,2.0,6,1,18569,5,50,Summer 2021 - Div C,2021-07-11,Seattle Gems,Perigo Park-Softball Field 1
+15,Avinash Naga,55618,Avinash Naga,3.0,0.0,0.0,0.0,11,0,18642,5,50,Summer 2021 - Div C,2021-07-25,SeattleJaguars,GrassLawn Park-Softball Field 1
+16,Avinash Naga,55618,Avinash Naga,4.0,0.0,0.0,1.0,15,2,18711,5,50,Summer 2021 - Div C,2021-08-07,Torpedoes,GrassLawn Park-Softball Field 1
+17,Avinash Naga,55618,Avinash Naga,4.0,0.0,0.0,1.0,15,2,18783,5,50,Summer 2021 - Div C,2021-08-15,Bouncers,Hartman Park-Soccer Field
+18,Avinash Naga,55618,Avinash Naga,4.0,0.0,0.0,2.0,27,0,18859,5,50,Summer 2021 - Div C,2021-08-28,Super Fit Stallions,North SeaTac Park
+19,Avinash Naga,55618,Avinash Naga,4.0,0.0,0.0,0.0,18,0,18964,5,50,Summer 2021 - Div C,2021-09-18,Indiawaale,Hidden Valley Park Field 1
+20,Avinash Naga,55618,Avinash Naga,4.0,0.0,0.0,1.0,11,1,19030,5,50,Summer 2021 - Div C,2021-10-02,Sound8,Marymoor Park Soccer #05
+21,Avinash Naga,55618,Avinash Naga,1.0,0.0,0.0,0.0,7,0,17731,6,47,Summer 2019 - Div D,2019-07-13,Eight Musketers,Redmond High School Stadium
+22,Avinash Naga,55618,Avinash Naga,3.0,0.0,0.0,0.0,7,1,17852,6,47,Summer 2019 - Div D,2019-07-27,Renton Dare Devils,GrassLawn Park-Softball Field 2
+23,Avinash Naga,55618,Avinash Naga,2.0,0.0,0.0,0.0,4,0,17955,6,47,Summer 2019 - Div D,2019-08-03,FatehCC-Blazers,Redmond Ridge Park -- Soccer Field
+24,Avinash Naga,55618,Avinash Naga,4.0,0.0,0.0,3.0,18,2,18006,6,47,Summer 2019 - Div D,2019-08-10,Daredevils CC,Ron Regis
+25,Avinash Naga,55618,Avinash Naga,1.3,0.0,0.0,0.0,3,2,18116,6,47,Summer 2019 - Div D,2019-08-25,Sheirokom Team,Eastlake High School Stadium
+26,Avinash Naga,55618,Avinash Naga,3.2,0.0,0.0,0.0,17,2,18256,6,47,Summer 2019 - Div D,2019-09-15,Sidewinders Reloaded,Redmond High School Stadium
+27,Avinash Naga,55618,Avinash Naga,4.0,0.0,0.0,1.0,23,1,18315,6,47,Summer 2019 - Div D,2019-09-29,Torpedoes,Shoreline Ground
+28,Avinash Naga,55618,Avinash Naga,3.0,0.0,0.0,1.0,12,2,18383,6,47,Summer 2019 - Div D,2019-10-20,Super Fit stars,North SeaTac Park
+29,Avinash Naga,55618,Avinash Naga,4.0,0.0,0.0,0.0,18,2,16352,6,46,Spring 2019 - Div D,2019-04-06,Eight Musketers,Hidden Valley Park Field 1
+30,Avinash Naga,55618,Avinash Naga,3.0,0.0,0.0,1.0,12,3,16434,6,46,Spring 2019 - Div D,2019-04-13,Team Gryphon,Perigo Park-Softball Field 1
+31,Avinash Naga,55618,Avinash Naga,2.0,0.0,0.0,1.0,9,0,16518,6,46,Spring 2019 - Div D,2019-04-21,FatehCC-Blazers,Redmond High School Stadium
+32,Phanindra Madduru,50314,Phanindra Madduru,4.0,0.0,0.0,1.0,17,2,20744,5,59,Spring 2023 - Div C,2023-04-02,Torpedoes,Ron Regis
+33,Phanindra Madduru,50314,Phanindra Madduru,4.0,0.0,0.0,0.0,19,0,20800,5,59,Spring 2023 - Div C,2023-04-09,Pirates of Seattle,North Robinswood Park
+34,Phanindra Madduru,50314,Phanindra Madduru,2.0,0.0,0.0,0.0,8,1,20004,4,57,Summer 2022 - Div B,2022-07-30,Great Eight,Redmond Ridge Park -- Soccer Field
+35,Phanindra Madduru,50314,Phanindra Madduru,2.0,0.0,0.0,1.0,11,1,20079,4,57,Summer 2022 - Div B,2022-08-07,Kachraboyzsecond,North SeaTac Park
+36,Phanindra Madduru,50314,Phanindra Madduru,4.0,0.0,0.0,3.0,28,1,20153,4,57,Summer 2022 - Div B,2022-08-20,Back Breakers,Marymoor Park Soccer #05
+37,Phanindra Madduru,50314,Phanindra Madduru,4.0,0.0,0.0,2.0,13,2,20227,4,57,Summer 2022 - Div B,2022-08-28,Pirates Of Seattle,Marymoor Park Soccer #05
+38,Phanindra Madduru,50314,Phanindra Madduru,3.0,0.0,0.0,2.0,5,3,20571,4,57,Summer 2022 - Div B,2022-10-15,Seattle United - Supercharged,Hidden Valley Park Field 1
+39,Phanindra Madduru,50314,Phanindra Madduru,4.0,0.0,0.0,0.0,16,0,19227,5,56,Spring 2022 - Div C,2022-03-19,Northern Thunder,Hidden Valley Park Field 1
+40,Phanindra Madduru,50314,Phanindra Madduru,3.0,1.0,0.0,1.0,9,1,19245,5,56,Spring 2022 - Div C,2022-03-27,Takbeer,Hidden Valley Park Field 1
+41,Phanindra Madduru,50314,Phanindra Madduru,2.3,0.0,0.0,1.0,11,1,19367,5,56,Spring 2022 - Div C,2022-04-23,Raftaar,Perigo Park-Softball Field 2
+42,Phanindra Madduru,50314,Phanindra Madduru,4.0,0.0,0.0,3.0,10,2,19483,5,56,Spring 2022 - Div C,2022-05-21,Torpedoes,North SeaTac Park
+43,Phanindra Madduru,50314,Phanindra Madduru,4.0,0.0,0.0,2.0,19,0,19590,5,56,Spring 2022 - Div C,2022-06-19,ATB Stallions,Hidden Valley Park Field 1
+44,Phanindra Madduru,50314,Phanindra Madduru,4.0,0.0,0.0,7.0,27,2,19798,5,56,Spring 2022 - Div C,2022-06-26,India Rebels,Redmond High School Stadium
+45,Phanindra Madduru,50314,Phanindra Madduru,4.0,0.0,0.0,3.0,7,4,19827,5,56,Spring 2022 - Div C,2022-07-09,Indiawaale,Hartman Park-Soccer Field
+46,Phanindra Madduru,50314,Phanindra Madduru,3.5,0.0,0.0,4.0,24,3,19937,5,56,Spring 2022 - Div C,2022-07-17,Daredevils CC,North SeaTac Park
+47,Phanindra Madduru,50314,Phanindra Madduru,4.0,0.0,2.0,0.0,31,0,19862,5,56,Spring 2022 - Div C,2022-07-23,India Rebels,North SeaTac Park
+48,Phanindra Madduru,50314,Phanindra Madduru,4.0,0.0,0.0,0.0,20,0,18642,5,50,Summer 2021 - Div C,2021-07-25,SeattleJaguars,GrassLawn Park-Softball Field 1
+49,Phanindra Madduru,50314,Phanindra Madduru,4.0,0.0,0.0,1.0,17,1,18711,5,50,Summer 2021 - Div C,2021-08-07,Torpedoes,GrassLawn Park-Softball Field 1
+50,Phanindra Madduru,50314,Phanindra Madduru,4.0,0.0,0.0,3.0,23,0,18783,5,50,Summer 2021 - Div C,2021-08-15,Bouncers,Hartman Park-Soccer Field
+51,Phanindra Madduru,50314,Phanindra Madduru,4.0,0.0,0.0,1.0,23,1,18859,5,50,Summer 2021 - Div C,2021-08-28,Super Fit Stallions,North SeaTac Park
+52,Phanindra Madduru,50314,Phanindra Madduru,4.0,0.0,0.0,3.0,18,3,18964,5,50,Summer 2021 - Div C,2021-09-18,Indiawaale,Hidden Valley Park Field 1
+53,Phanindra Madduru,50314,Phanindra Madduru,3.0,0.0,0.0,1.0,11,1,19030,5,50,Summer 2021 - Div C,2021-10-02,Sound8,Marymoor Park Soccer #05
+54,Phanindra Madduru,50314,Phanindra Madduru,4.0,0.0,0.0,4.0,14,1,17731,6,47,Summer 2019 - Div D,2019-07-13,Eight Musketers,Redmond High School Stadium
+55,Phanindra Madduru,50314,Phanindra Madduru,4.0,0.0,0.0,3.0,15,1,17852,6,47,Summer 2019 - Div D,2019-07-27,Renton Dare Devils,GrassLawn Park-Softball Field 2
+56,Phanindra Madduru,50314,Phanindra Madduru,4.0,0.0,0.0,4.0,15,2,17955,6,47,Summer 2019 - Div D,2019-08-03,FatehCC-Blazers,Redmond Ridge Park -- Soccer Field
+57,Phanindra Madduru,50314,Phanindra Madduru,4.0,1.0,0.0,4.0,16,1,18006,6,47,Summer 2019 - Div D,2019-08-10,Daredevils CC,Ron Regis
+58,Phanindra Madduru,50314,Phanindra Madduru,2.0,0.0,0.0,1.0,6,1,18116,6,47,Summer 2019 - Div D,2019-08-25,Sheirokom Team,Eastlake High School Stadium
+59,Phanindra Madduru,50314,Phanindra Madduru,4.0,0.0,0.0,2.0,23,2,18256,6,47,Summer 2019 - Div D,2019-09-15,Sidewinders Reloaded,Redmond High School Stadium
+60,Phanindra Madduru,50314,Phanindra Madduru,4.0,0.0,0.0,4.0,28,1,18315,6,47,Summer 2019 - Div D,2019-09-29,Torpedoes,Shoreline Ground
+61,Phanindra Madduru,50314,Phanindra Madduru,2.0,0.0,0.0,0.0,13,0,18383,6,47,Summer 2019 - Div D,2019-10-20,Super Fit stars,North SeaTac Park
+62,Phanindra Madduru,50314,Phanindra Madduru,4.0,0.0,0.0,4.0,21,1,16264,6,46,Spring 2019 - Div D,2019-03-24,Crime Masters Gogo,Redmond High School Stadium
+63,Phanindra Madduru,50314,Phanindra Madduru,3.0,0.0,0.0,2.0,27,0,16352,6,46,Spring 2019 - Div D,2019-04-06,Eight Musketers,Hidden Valley Park Field 1
+64,Phanindra Madduru,50314,Phanindra Madduru,4.0,0.0,0.0,3.0,26,0,16434,6,46,Spring 2019 - Div D,2019-04-13,Team Gryphon,Perigo Park-Softball Field 1
+65,Phanindra Madduru,50314,Phanindra Madduru,3.0,0.0,0.0,0.0,21,0,16518,6,46,Spring 2019 - Div D,2019-04-21,FatehCC-Blazers,Redmond High School Stadium
+66,Phanindra Madduru,50314,Phanindra Madduru,4.0,0.0,0.0,1.0,24,1,16594,6,46,Spring 2019 - Div D,2019-05-19,SEA-Chargers,Marymoor Park Soccer #03
+67,Phanindra Madduru,50314,Phanindra Madduru,3.0,0.0,0.0,5.0,32,1,16687,6,46,Spring 2019 - Div D,2019-06-02,Pirates of Seattle,North Robinswood Park
+68,Phanindra Madduru,50314,Phanindra Madduru,4.0,0.0,1.0,1.0,20,1,16770,6,46,Spring 2019 - Div D,2019-06-15,Gilly,Eastlake High School Stadium
+69,Suresh Poliah,55616,Suresh Poliah,3.0,0.0,0.0,3.0,20,2,20744,5,59,Spring 2023 - Div C,2023-04-02,Torpedoes,Ron Regis
+70,Suresh Poliah,55616,Suresh Poliah,1.0,0.0,0.0,2.0,3,0,20800,5,59,Spring 2023 - Div C,2023-04-09,Pirates of Seattle,North Robinswood Park
+71,Suresh Poliah,55616,Suresh Poliah,1.0,0.0,0.0,1.0,3,0,20004,4,57,Summer 2022 - Div B,2022-07-30,Great Eight,Redmond Ridge Park -- Soccer Field
+72,Suresh Poliah,55616,Suresh Poliah,2.0,0.0,0.0,2.0,14,0,20153,4,57,Summer 2022 - Div B,2022-08-20,Back Breakers,Marymoor Park Soccer #05
+73,Suresh Poliah,55616,Suresh Poliah,1.0,0.0,0.0,0.0,6,0,20227,4,57,Summer 2022 - Div B,2022-08-28,Pirates Of Seattle,Marymoor Park Soccer #05
+74,Suresh Poliah,55616,Suresh Poliah,2.0,0.0,0.0,1.0,10,1,20302,4,57,Summer 2022 - Div B,2022-09-11,Stingrays,Ron Regis
+75,Suresh Poliah,55616,Suresh Poliah,2.0,0.0,1.0,2.0,16,0,20438,4,57,Summer 2022 - Div B,2022-10-08,Torpedoes,Hidden Valley Park Field 1
+76,Suresh Poliah,55616,Suresh Poliah,4.0,0.0,0.0,4.0,15,2,19437,5,56,Spring 2022 - Div C,2022-05-08,Slammers,Hidden Valley Park Field 1
+77,Suresh Poliah,55616,Suresh Poliah,4.0,0.0,0.0,0.0,27,1,19862,5,56,Spring 2022 - Div C,2022-07-23,India Rebels,North SeaTac Park
+78,Suresh Poliah,55616,Suresh Poliah,2.0,0.0,0.0,1.0,11,0,18711,5,50,Summer 2021 - Div C,2021-08-07,Torpedoes,GrassLawn Park-Softball Field 1
+79,Suresh Poliah,55616,Suresh Poliah,3.0,0.0,0.0,0.0,38,1,18859,5,50,Summer 2021 - Div C,2021-08-28,Super Fit Stallions,North SeaTac Park
+80,Suresh Poliah,55616,Suresh Poliah,1.0,0.0,0.0,0.0,7,1,16518,6,46,Spring 2019 - Div D,2019-04-21,FatehCC-Blazers,Redmond High School Stadium
+81,Suresh Poliah,55616,Suresh Poliah,1.0,0.0,0.0,2.0,7,0,16770,6,46,Spring 2019 - Div D,2019-06-15,Gilly,Eastlake High School Stadium
+82,Krishna Ykc,64775,Krishna Ykc,2.0,0.0,1.0,8.0,19,1,20659,5,59,Spring 2023 - Div C,2023-03-25,Seattle Blues,Meadowdale Multipurpose Field 1
+83,Deepak CC,56905,Deepak CC,2.1,0.0,0.0,0.0,14,1,20659,5,59,Spring 2023 - Div C,2023-03-25,Seattle Blues,Meadowdale Multipurpose Field 1
+84,Deepak CC,56905,Deepak CC,3.0,0.0,0.0,2.0,16,0,20744,5,59,Spring 2023 - Div C,2023-04-02,Torpedoes,Ron Regis
+85,Deepak CC,56905,Deepak CC,1.0,0.0,0.0,1.0,5,0,20079,4,57,Summer 2022 - Div B,2022-08-07,Kachraboyzsecond,North SeaTac Park
+86,Deepak CC,56905,Deepak CC,2.0,0.0,0.0,0.0,9,0,20227,4,57,Summer 2022 - Div B,2022-08-28,Pirates Of Seattle,Marymoor Park Soccer #05
+87,Deepak CC,56905,Deepak CC,2.0,0.0,0.0,0.0,12,1,20302,4,57,Summer 2022 - Div B,2022-09-11,Stingrays,Ron Regis
+88,Deepak CC,56905,Deepak CC,2.0,0.0,0.0,2.0,14,0,20438,4,57,Summer 2022 - Div B,2022-10-08,Torpedoes,Hidden Valley Park Field 1
+89,Deepak CC,56905,Deepak CC,2.0,0.0,1.0,1.0,15,1,20571,4,57,Summer 2022 - Div B,2022-10-15,Seattle United - Supercharged,Hidden Valley Park Field 1
+90,Deepak CC,56905,Deepak CC,1.0,0.0,1.0,0.0,8,1,18859,5,50,Summer 2021 - Div C,2021-08-28,Super Fit Stallions,North SeaTac Park
+91,Deepak CC,56905,Deepak CC,2.0,0.0,0.0,0.0,12,1,17731,6,47,Summer 2019 - Div D,2019-07-13,Eight Musketers,Redmond High School Stadium
+92,Deepak CC,56905,Deepak CC,4.0,0.0,1.0,0.0,12,2,17955,6,47,Summer 2019 - Div D,2019-08-03,FatehCC-Blazers,Redmond Ridge Park -- Soccer Field
+93,Deepak CC,56905,Deepak CC,3.0,0.0,0.0,1.0,20,0,16264,6,46,Spring 2019 - Div D,2019-03-24,Crime Masters Gogo,Redmond High School Stadium
+94,Deepak CC,56905,Deepak CC,1.0,0.0,0.0,0.0,3,0,16518,6,46,Spring 2019 - Div D,2019-04-21,FatehCC-Blazers,Redmond High School Stadium
+95,Deepak CC,56905,Deepak CC,3.0,0.0,0.0,0.0,14,1,16687,6,46,Spring 2019 - Div D,2019-06-02,Pirates of Seattle,North Robinswood Park
+96,Deepak CC,56905,Deepak CC,3.0,0.0,0.0,0.0,15,2,16770,6,46,Spring 2019 - Div D,2019-06-15,Gilly,Eastlake High School Stadium
+97,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,4.0,0.0,0.0,0.0,20,0,20659,5,59,Spring 2023 - Div C,2023-03-25,Seattle Blues,Meadowdale Multipurpose Field 1
+98,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,4.0,0.0,0.0,2.0,24,0,20744,5,59,Spring 2023 - Div C,2023-04-02,Torpedoes,Ron Regis
+99,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,3.0,1.0,0.0,0.0,12,1,20800,5,59,Spring 2023 - Div C,2023-04-09,Pirates of Seattle,North Robinswood Park
+100,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,3.0,0.0,0.0,0.0,10,1,19227,5,56,Spring 2022 - Div C,2022-03-19,Northern Thunder,Hidden Valley Park Field 1
+101,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,2.0,0.0,0.0,0.0,3,1,19245,5,56,Spring 2022 - Div C,2022-03-27,Takbeer,Hidden Valley Park Field 1
+102,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,3.0,0.0,0.0,1.0,10,1,19367,5,56,Spring 2022 - Div C,2022-04-23,Raftaar,Perigo Park-Softball Field 2
+103,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,1.0,0.0,0.0,0.0,4,0,19437,5,56,Spring 2022 - Div C,2022-05-08,Slammers,Hidden Valley Park Field 1
+104,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,1.0,0.0,0.0,0.0,18,0,19798,5,56,Spring 2022 - Div C,2022-06-26,India Rebels,Redmond High School Stadium
+105,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,2.0,0.0,0.0,0.0,9,0,18964,5,50,Summer 2021 - Div C,2021-09-18,Indiawaale,Hidden Valley Park Field 1
+106,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,4.0,0.0,0.0,0.0,14,1,17731,6,47,Summer 2019 - Div D,2019-07-13,Eight Musketers,Redmond High School Stadium
+107,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,2.0,0.0,0.0,2.0,12,2,17852,6,47,Summer 2019 - Div D,2019-07-27,Renton Dare Devils,GrassLawn Park-Softball Field 2
+108,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,3.0,0.0,0.0,4.0,17,0,18383,6,47,Summer 2019 - Div D,2019-10-20,Super Fit stars,North SeaTac Park
+109,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,4.0,0.0,1.0,2.0,20,0,16264,6,46,Spring 2019 - Div D,2019-03-24,Crime Masters Gogo,Redmond High School Stadium
+110,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,4.0,0.0,1.0,2.0,22,1,16352,6,46,Spring 2019 - Div D,2019-04-06,Eight Musketers,Hidden Valley Park Field 1
+111,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,1.0,0.0,1.0,2.0,11,0,16434,6,46,Spring 2019 - Div D,2019-04-13,Team Gryphon,Perigo Park-Softball Field 1
+112,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,4.0,0.0,0.0,1.0,17,1,16594,6,46,Spring 2019 - Div D,2019-05-19,SEA-Chargers,Marymoor Park Soccer #03
+113,Ashwin Muthu Kumar,57071,Ashwin Muthu Kumar,1.1,0.0,0.0,1.0,14,0,16770,6,46,Spring 2019 - Div D,2019-06-15,Gilly,Eastlake High School Stadium
+114,Madhu Paruchuri,62700,Madhu Paruchuri,3.0,0.0,0.0,0.0,14,0,20659,5,59,Spring 2023 - Div C,2023-03-25,Seattle Blues,Meadowdale Multipurpose Field 1
+115,Madhu Paruchuri,62700,Madhu Paruchuri,2.0,0.0,0.0,5.0,9,3,20079,4,57,Summer 2022 - Div B,2022-08-07,Kachraboyzsecond,North SeaTac Park
+116,Madhu Paruchuri,62700,Madhu Paruchuri,4.0,0.0,0.0,0.0,16,3,20438,4,57,Summer 2022 - Div B,2022-10-08,Torpedoes,Hidden Valley Park Field 1
+117,Madhu Paruchuri,62700,Madhu Paruchuri,4.0,0.0,0.0,3.0,9,1,19483,5,56,Spring 2022 - Div C,2022-05-21,Torpedoes,North SeaTac Park
+118,Madhu Paruchuri,62700,Madhu Paruchuri,2.3,0.0,0.0,0.0,8,3,19590,5,56,Spring 2022 - Div C,2022-06-19,ATB Stallions,Hidden Valley Park Field 1
+119,Madhu Paruchuri,62700,Madhu Paruchuri,2.2,0.0,0.0,1.0,3,2,19827,5,56,Spring 2022 - Div C,2022-07-09,Indiawaale,Hartman Park-Soccer Field
+120,Madhu Paruchuri,62700,Madhu Paruchuri,3.0,0.0,0.0,0.0,13,0,19937,5,56,Spring 2022 - Div C,2022-07-17,Daredevils CC,North SeaTac Park
+121,Madhu Paruchuri,62700,Madhu Paruchuri,4.0,0.0,0.0,0.0,24,3,19862,5,56,Spring 2022 - Div C,2022-07-23,India Rebels,North SeaTac Park
+122,Madhu Paruchuri,62700,Madhu Paruchuri,2.2,0.0,1.0,2.0,5,4,18569,5,50,Summer 2021 - Div C,2021-07-11,Seattle Gems,Perigo Park-Softball Field 1
+123,Madhu Paruchuri,62700,Madhu Paruchuri,3.0,0.0,0.0,0.0,20,0,18642,5,50,Summer 2021 - Div C,2021-07-25,SeattleJaguars,GrassLawn Park-Softball Field 1
+124,Madhu Paruchuri,62700,Madhu Paruchuri,2.0,0.0,0.0,1.0,12,0,18711,5,50,Summer 2021 - Div C,2021-08-07,Torpedoes,GrassLawn Park-Softball Field 1
+125,Madhu Paruchuri,62700,Madhu Paruchuri,4.0,0.0,1.0,2.0,18,2,18783,5,50,Summer 2021 - Div C,2021-08-15,Bouncers,Hartman Park-Soccer Field
+126,Madhu Paruchuri,62700,Madhu Paruchuri,4.0,1.0,0.0,2.0,22,1,18859,5,50,Summer 2021 - Div C,2021-08-28,Super Fit Stallions,North SeaTac Park
+127,Madhu Paruchuri,62700,Madhu Paruchuri,3.0,0.0,0.0,2.0,11,0,18964,5,50,Summer 2021 - Div C,2021-09-18,Indiawaale,Hidden Valley Park Field 1
+128,Madhu Paruchuri,62700,Madhu Paruchuri,3.0,1.0,0.0,2.0,10,3,19030,5,50,Summer 2021 - Div C,2021-10-02,Sound8,Marymoor Park Soccer #05
+129,Kowshik Goud,63316,Kowshik Goud,3.0,0.0,0.0,1.0,23,0,20800,5,59,Spring 2023 - Div C,2023-04-09,Pirates of Seattle,North Robinswood Park
+130,Kowshik Goud,63316,Kowshik Goud,2.0,0.0,0.0,1.0,11,2,20079,4,57,Summer 2022 - Div B,2022-08-07,Kachraboyzsecond,North SeaTac Park
+131,Kowshik Goud,63316,Kowshik Goud,3.0,0.0,0.0,2.0,30,2,20153,4,57,Summer 2022 - Div B,2022-08-20,Back Breakers,Marymoor Park Soccer #05
+132,Kowshik Goud,63316,Kowshik Goud,2.0,0.0,1.0,0.0,14,0,20302,4,57,Summer 2022 - Div B,2022-09-11,Stingrays,Ron Regis
+133,Kowshik Goud,63316,Kowshik Goud,3.0,0.0,1.0,1.0,19,0,20571,4,57,Summer 2022 - Div B,2022-10-15,Seattle United - Supercharged,Hidden Valley Park Field 1
+134,Kowshik Goud,63316,Kowshik Goud,2.0,0.0,0.0,1.0,16,0,19437,5,56,Spring 2022 - Div C,2022-05-08,Slammers,Hidden Valley Park Field 1
+135,Anirudh Tadakamalla,64302,Anirudh Tadakamalla,1.0,0.0,0.0,1.0,7,0,20744,5,59,Spring 2023 - Div C,2023-04-02,Torpedoes,Ron Regis
+136,Anirudh Tadakamalla,64302,Anirudh Tadakamalla,1.0,0.0,0.0,0.0,6,0,20800,5,59,Spring 2023 - Div C,2023-04-09,Pirates of Seattle,North Robinswood Park
+137,Anirudh Tadakamalla,64302,Anirudh Tadakamalla,2.0,0.0,0.0,1.0,9,1,20227,4,57,Summer 2022 - Div B,2022-08-28,Pirates Of Seattle,Marymoor Park Soccer #05
+138,Anirudh Tadakamalla,64302,Anirudh Tadakamalla,2.0,0.0,0.0,0.0,6,1,20571,4,57,Summer 2022 - Div B,2022-10-15,Seattle United - Supercharged,Hidden Valley Park Field 1
+139,Venkatesh Srinivasan,55617,Venkatesh Srinivasan,1.0,0.0,0.0,5.0,11,0,20744,5,59,Spring 2023 - Div C,2023-04-02,Torpedoes,Ron Regis
+140,Venkatesh Srinivasan,55617,Venkatesh Srinivasan,1.3,0.0,0.0,0.0,12,0,19590,5,56,Spring 2022 - Div C,2022-06-19,ATB Stallions,Hidden Valley Park Field 1
+141,Venkatesh Srinivasan,55617,Venkatesh Srinivasan,3.0,0.0,0.0,1.0,17,1,19798,5,56,Spring 2022 - Div C,2022-06-26,India Rebels,Redmond High School Stadium
+142,Venkatesh Srinivasan,55617,Venkatesh Srinivasan,2.0,0.0,0.0,0.0,18,0,19862,5,56,Spring 2022 - Div C,2022-07-23,India Rebels,North SeaTac Park
+143,Krishna Goli,64301,Krishna Goli,1.0,0.0,0.0,2.0,16,0,20302,4,57,Summer 2022 - Div B,2022-09-11,Stingrays,Ron Regis
+144,Krishna Goli,64301,Krishna Goli,4.0,0.0,0.0,2.0,31,1,20438,4,57,Summer 2022 - Div B,2022-10-08,Torpedoes,Hidden Valley Park Field 1
+145,Krishna Goli,64301,Krishna Goli,1.0,0.0,0.0,0.0,4,1,20571,4,57,Summer 2022 - Div B,2022-10-15,Seattle United - Supercharged,Hidden Valley Park Field 1
+146,Yash Patil,64428,Yash Patil,3.0,0.0,0.0,1.0,18,2,20227,4,57,Summer 2022 - Div B,2022-08-28,Pirates Of Seattle,Marymoor Park Soccer #05
+147,Aviraj Sawant,64427,Aviraj Sawant,4.0,0.0,0.0,1.0,18,1,20227,4,57,Summer 2022 - Div B,2022-08-28,Pirates Of Seattle,Marymoor Park Soccer #05
+148,Aviraj Sawant,64427,Aviraj Sawant,4.0,0.0,0.0,0.0,17,0,20302,4,57,Summer 2022 - Div B,2022-09-11,Stingrays,Ron Regis
+149,Aviraj Sawant,64427,Aviraj Sawant,4.0,0.0,0.0,1.0,20,0,20438,4,57,Summer 2022 - Div B,2022-10-08,Torpedoes,Hidden Valley Park Field 1
+150,Dheeraj Jonnala,53098,Dheeraj Jonnala,3.0,0.0,0.0,1.0,28,1,20153,4,57,Summer 2022 - Div B,2022-08-20,Back Breakers,Marymoor Park Soccer #05
+151,Dheeraj Jonnala,53098,Dheeraj Jonnala,1.0,0.0,0.0,0.0,7,0,19437,5,56,Spring 2022 - Div C,2022-05-08,Slammers,Hidden Valley Park Field 1
+152,Dheeraj Jonnala,53098,Dheeraj Jonnala,1.4,0.0,0.0,0.0,18,1,19862,5,56,Spring 2022 - Div C,2022-07-23,India Rebels,North SeaTac Park
+153,Dheeraj Jonnala,53098,Dheeraj Jonnala,2.0,0.0,0.0,0.0,7,1,18569,5,50,Summer 2021 - Div C,2021-07-11,Seattle Gems,Perigo Park-Softball Field 1
+154,Dheeraj Jonnala,53098,Dheeraj Jonnala,1.0,0.0,0.0,0.0,9,0,18642,5,50,Summer 2021 - Div C,2021-07-25,SeattleJaguars,GrassLawn Park-Softball Field 1
+155,Siva Chaitanya Yalamanchili,64300,Siva Chaitanya Yalamanchili,1.2,0.0,1.0,2.0,11,1,20079,4,57,Summer 2022 - Div B,2022-08-07,Kachraboyzsecond,North SeaTac Park
+156,Chiranjeevi Nagireddy,62701,Chiranjeevi Nagireddy,1.0,0.0,0.0,0.0,3,0,20302,4,57,Summer 2022 - Div B,2022-09-11,Stingrays,Ron Regis
+157,Chiranjeevi Nagireddy,62701,Chiranjeevi Nagireddy,0.5,0.0,0.0,1.0,5,1,20571,4,57,Summer 2022 - Div B,2022-10-15,Seattle United - Supercharged,Hidden Valley Park Field 1
+158,Animesh Tiwari,63314,Animesh Tiwari,1.3,0.0,1.0,0.0,14,0,20004,4,57,Summer 2022 - Div B,2022-07-30,Great Eight,Redmond Ridge Park -- Soccer Field
+159,Shashank Murthy,55615,Shashank Murthy,4.0,1.0,1.0,0.0,12,1,19227,5,56,Spring 2022 - Div C,2022-03-19,Northern Thunder,Hidden Valley Park Field 1
+160,Shashank Murthy,55615,Shashank Murthy,4.0,0.0,0.0,0.0,8,3,19245,5,56,Spring 2022 - Div C,2022-03-27,Takbeer,Hidden Valley Park Field 1
+161,Shashank Murthy,55615,Shashank Murthy,3.0,1.0,0.0,1.0,5,1,19367,5,56,Spring 2022 - Div C,2022-04-23,Raftaar,Perigo Park-Softball Field 2
+162,Shashank Murthy,55615,Shashank Murthy,4.0,0.0,0.0,2.0,16,1,19437,5,56,Spring 2022 - Div C,2022-05-08,Slammers,Hidden Valley Park Field 1
+163,Shashank Murthy,55615,Shashank Murthy,2.2,0.0,2.0,0.0,22,2,19483,5,56,Spring 2022 - Div C,2022-05-21,Torpedoes,North SeaTac Park
+164,Shashank Murthy,55615,Shashank Murthy,4.0,0.0,0.0,0.0,8,2,19590,5,56,Spring 2022 - Div C,2022-06-19,ATB Stallions,Hidden Valley Park Field 1
+165,Shashank Murthy,55615,Shashank Murthy,4.0,1.0,0.0,0.0,11,1,19798,5,56,Spring 2022 - Div C,2022-06-26,India Rebels,Redmond High School Stadium
+166,Shashank Murthy,55615,Shashank Murthy,3.0,0.0,0.0,0.0,14,0,19827,5,56,Spring 2022 - Div C,2022-07-09,Indiawaale,Hartman Park-Soccer Field
+167,Shashank Murthy,55615,Shashank Murthy,3.0,0.0,0.0,1.0,22,3,19937,5,56,Spring 2022 - Div C,2022-07-17,Daredevils CC,North SeaTac Park
+168,Shashank Murthy,55615,Shashank Murthy,2.0,0.0,0.0,1.0,3,1,18569,5,50,Summer 2021 - Div C,2021-07-11,Seattle Gems,Perigo Park-Softball Field 1
+169,Shashank Murthy,55615,Shashank Murthy,4.0,0.0,0.0,0.0,12,2,18642,5,50,Summer 2021 - Div C,2021-07-25,SeattleJaguars,GrassLawn Park-Softball Field 1
+170,Shashank Murthy,55615,Shashank Murthy,4.0,0.0,0.0,1.0,20,0,18711,5,50,Summer 2021 - Div C,2021-08-07,Torpedoes,GrassLawn Park-Softball Field 1
+171,Shashank Murthy,55615,Shashank Murthy,4.0,0.0,0.0,2.0,17,0,18783,5,50,Summer 2021 - Div C,2021-08-15,Bouncers,Hartman Park-Soccer Field
+172,Shashank Murthy,55615,Shashank Murthy,3.0,0.0,2.0,0.0,13,2,18964,5,50,Summer 2021 - Div C,2021-09-18,Indiawaale,Hidden Valley Park Field 1
+173,Shashank Murthy,55615,Shashank Murthy,4.0,0.0,0.0,0.0,13,2,19030,5,50,Summer 2021 - Div C,2021-10-02,Sound8,Marymoor Park Soccer #05
+174,Shashank Murthy,55615,Shashank Murthy,2.0,0.0,0.0,3.0,15,0,17852,6,47,Summer 2019 - Div D,2019-07-27,Renton Dare Devils,GrassLawn Park-Softball Field 2
+175,Shashank Murthy,55615,Shashank Murthy,2.0,0.0,0.0,2.0,7,1,18116,6,47,Summer 2019 - Div D,2019-08-25,Sheirokom Team,Eastlake High School Stadium
+176,Shashank Murthy,55615,Shashank Murthy,4.0,1.0,0.0,0.0,10,0,18256,6,47,Summer 2019 - Div D,2019-09-15,Sidewinders Reloaded,Redmond High School Stadium
+177,Shashank Murthy,55615,Shashank Murthy,4.0,0.0,0.0,0.0,24,0,18315,6,47,Summer 2019 - Div D,2019-09-29,Torpedoes,Shoreline Ground
+178,Shashank Murthy,55615,Shashank Murthy,4.0,0.0,0.0,1.0,16,1,18383,6,47,Summer 2019 - Div D,2019-10-20,Super Fit stars,North SeaTac Park
+179,Shashank Murthy,55615,Shashank Murthy,4.0,0.0,0.0,0.0,15,1,16434,6,46,Spring 2019 - Div D,2019-04-13,Team Gryphon,Perigo Park-Softball Field 1
+180,Shashank Murthy,55615,Shashank Murthy,4.0,0.0,0.0,1.0,11,1,16687,6,46,Spring 2019 - Div D,2019-06-02,Pirates of Seattle,North Robinswood Park
+181,Shashank Murthy,55615,Shashank Murthy,3.0,0.0,0.0,1.0,22,1,16770,6,46,Spring 2019 - Div D,2019-06-15,Gilly,Eastlake High School Stadium
+182,Srinivas Potluri,57069,Srinivas Potluri,2.0,0.0,0.0,2.0,15,0,17731,6,47,Summer 2019 - Div D,2019-07-13,Eight Musketers,Redmond High School Stadium
+183,Srinivas Potluri,57069,Srinivas Potluri,3.3,0.0,0.0,0.0,7,3,17852,6,47,Summer 2019 - Div D,2019-07-27,Renton Dare Devils,GrassLawn Park-Softball Field 2
+184,Srinivas Potluri,57069,Srinivas Potluri,3.0,0.0,0.0,0.0,8,1,17955,6,47,Summer 2019 - Div D,2019-08-03,FatehCC-Blazers,Redmond Ridge Park -- Soccer Field
+185,Srinivas Potluri,57069,Srinivas Potluri,4.0,0.0,0.0,2.0,13,0,18006,6,47,Summer 2019 - Div D,2019-08-10,Daredevils CC,Ron Regis
+186,Srinivas Potluri,57069,Srinivas Potluri,2.0,0.0,0.0,0.0,7,3,18116,6,47,Summer 2019 - Div D,2019-08-25,Sheirokom Team,Eastlake High School Stadium
+187,Srinivas Potluri,57069,Srinivas Potluri,4.0,0.0,0.0,0.0,19,1,18256,6,47,Summer 2019 - Div D,2019-09-15,Sidewinders Reloaded,Redmond High School Stadium
+188,Srinivas Potluri,57069,Srinivas Potluri,4.0,0.0,0.0,0.0,20,1,18315,6,47,Summer 2019 - Div D,2019-09-29,Torpedoes,Shoreline Ground
+189,Srinivas Potluri,57069,Srinivas Potluri,3.0,0.0,0.0,0.0,13,1,18383,6,47,Summer 2019 - Div D,2019-10-20,Super Fit stars,North SeaTac Park
+190,Srinivas Potluri,57069,Srinivas Potluri,4.0,0.0,0.0,3.0,16,0,16264,6,46,Spring 2019 - Div D,2019-03-24,Crime Masters Gogo,Redmond High School Stadium
+191,Srinivas Potluri,57069,Srinivas Potluri,4.0,0.0,0.0,1.0,15,3,16352,6,46,Spring 2019 - Div D,2019-04-06,Eight Musketers,Hidden Valley Park Field 1
+192,Srinivas Potluri,57069,Srinivas Potluri,4.0,0.0,0.0,2.0,20,0,16434,6,46,Spring 2019 - Div D,2019-04-13,Team Gryphon,Perigo Park-Softball Field 1
+193,Srinivas Potluri,57069,Srinivas Potluri,3.0,0.0,0.0,0.0,9,1,16518,6,46,Spring 2019 - Div D,2019-04-21,FatehCC-Blazers,Redmond High School Stadium
+194,Srinivas Potluri,57069,Srinivas Potluri,4.0,0.0,0.0,2.0,21,1,16594,6,46,Spring 2019 - Div D,2019-05-19,SEA-Chargers,Marymoor Park Soccer #03
+195,Srinivas Potluri,57069,Srinivas Potluri,4.0,0.0,0.0,0.0,20,3,16687,6,46,Spring 2019 - Div D,2019-06-02,Pirates of Seattle,North Robinswood Park
+196,Srinivas Potluri,57069,Srinivas Potluri,3.0,0.0,0.0,0.0,24,1,16770,6,46,Spring 2019 - Div D,2019-06-15,Gilly,Eastlake High School Stadium
+197,Arjun Reddy Toom,57072,Arjun Reddy Toom,4.0,0.0,0.0,6.0,28,2,18006,6,47,Summer 2019 - Div D,2019-08-10,Daredevils CC,Ron Regis
+198,Arjun Reddy Toom,57072,Arjun Reddy Toom,1.0,0.0,0.0,0.0,3,0,16352,6,46,Spring 2019 - Div D,2019-04-06,Eight Musketers,Hidden Valley Park Field 1
+199,Arjun Reddy Toom,57072,Arjun Reddy Toom,1.0,0.0,0.0,0.0,9,0,16518,6,46,Spring 2019 - Div D,2019-04-21,FatehCC-Blazers,Redmond High School Stadium
+200,Arjun Reddy Toom,57072,Arjun Reddy Toom,1.0,0.0,0.0,1.0,5,0,16687,6,46,Spring 2019 - Div D,2019-06-02,Pirates of Seattle,North Robinswood Park
+201,Sudheer CC,57073,Sudheer CC,1.0,0.0,0.0,0.0,6,1,17955,6,47,Summer 2019 - Div D,2019-08-03,FatehCC-Blazers,Redmond Ridge Park -- Soccer Field
+202,Sudheer CC,57073,Sudheer CC,2.0,0.0,0.0,1.0,9,1,16594,6,46,Spring 2019 - Div D,2019-05-19,SEA-Chargers,Marymoor Park Soccer #03
+203,Vamsi Cc,59936,Vamsi Cc,3.0,0.0,0.0,3.0,21,1,17731,6,47,Summer 2019 - Div D,2019-07-13,Eight Musketers,Redmond High School Stadium
+204,Vamsi Cc,59936,Vamsi Cc,2.0,0.0,1.0,0.0,11,0,17955,6,47,Summer 2019 - Div D,2019-08-03,FatehCC-Blazers,Redmond Ridge Park -- Soccer Field
+205,Pavan CC,54469,Pavan CC,1.0,0.0,0.0,0.0,7,0,16518,6,46,Spring 2019 - Div D,2019-04-21,FatehCC-Blazers,Redmond High School Stadium
+206,Pavan CC,54469,Pavan CC,2.0,0.0,0.0,0.0,14,0,16594,6,46,Spring 2019 - Div D,2019-05-19,SEA-Chargers,Marymoor Park Soccer #03
+207,Pavan CC,54469,Pavan CC,1.0,0.0,0.0,0.0,7,0,16687,6,46,Spring 2019 - Div D,2019-06-02,Pirates of Seattle,North Robinswood Park
+</div>
+    </body>
+</html>
